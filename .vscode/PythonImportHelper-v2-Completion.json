@@ -214,6 +214,14 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -947,7 +955,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "uri = \"bolt://localhost:7687\"\nuser = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,",
+        "peekOfCode": "uri = os.environ.get(\"NEO4J_URI\")\nuser = os.environ.get(\"NEO4J_USERNAME\")\npassword = os.environ.get(\"NEO4J_PASSWORD\")\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -956,7 +964,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "user = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
+        "peekOfCode": "user = os.environ.get(\"NEO4J_USERNAME\")\npassword = os.environ.get(\"NEO4J_PASSWORD\")\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -965,7 +973,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "password = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],",
+        "peekOfCode": "password = os.environ.get(\"NEO4J_PASSWORD\")\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -1046,7 +1054,7 @@
         "kind": 2,
         "importPath": "net-graph",
         "description": "net-graph",
-        "peekOfCode": "def pagerank(graph):\n    print(\"=========PAGERANK===========\")\n    # Apply PageRank to the graph\n    pr = nx.pagerank(graph)\n    # Print the PageRank scores\n    for node, score in pr.items():\n        print(f\"Node {node}: PageRank score = {score}\")\ndef find_cycles(graph):\n    print(\"========CYCLES=======\")\n    accounts = list(nx.simple_cycles(graph))",
+        "peekOfCode": "def pagerank(graph):\n    print(\"=========PAGERANK===========\")\n    # Apply PageRank to the graph\n    pr = nx.pagerank(graph)\n    # Print the PageRank scores\n    for node, score in pr.items():\n        print(f\"Node {node}: PageRank score = {score}\")\ndef find_cycles(graph):\n    print(\"========CYCLES=======\")\n    cycles = list(nx.simple_cycles(graph))",
         "detail": "net-graph",
         "documentation": {}
     },
@@ -1055,7 +1063,7 @@
         "kind": 2,
         "importPath": "net-graph",
         "description": "net-graph",
-        "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    accounts = list(nx.simple_cycles(graph))\ndef centralities(G):\n    print(\"==========Centrality Measures==========\")\n    # degree centrality\n    deg_cen = nx.degree_centrality(G)\n    print(\"Degree centrality:\", deg_cen)\n    # closeness centrality\n    clo_cen = nx.closeness_centrality(G)",
+        "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    cycles = list(nx.simple_cycles(graph))\n    result = []\n    for cycle in cycles:\n        if len(cycle) > 3:\n            result.append(cycle)\n    print(result)\ndef centralities(G):\n    print(\"==========Centrality Measures==========\")",
         "detail": "net-graph",
         "documentation": {}
     },
