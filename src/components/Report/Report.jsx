@@ -110,14 +110,22 @@ const Report = () => {
     fetchCycles();
   };
 
+  const handleDownloadPdf = ()=>{
+    const pdfBlob = new Blob([<Report />], { type: 'application/pdf' });
+    // Trigger the download of the Blob as a file
+    saveAs(pdfBlob, 'example.pdf');
+  }
   return (
     <div className={styles.pageContainer}>
       <div className={styles.logoContainer}>
         <img src={logo} alt="" />
       </div>
+      <div className={styles.toolbarContainer}>
+        <button className={styles.genReportTool} onClick={handleDownloadPdf}>Download Report</button>
+      </div>
       <div className={styles.workspaceContainer}>
         <div className={styles.allAccountsTxnCount}>
-        <input type="file" onChange={changeHandler} />
+          <input type="file" onChange={changeHandler} />
           <input
             type="text"
             onChange={(e) => setAccountNo(e.target.value)}
@@ -128,35 +136,36 @@ const Report = () => {
           </button>
           {/* Displays find Volume data */}
           <div className={styles.tables}>
-          <table>
-            <thead>
-              <tr>
-                <td>Account No</td>
-                <td>Incoming Count</td>
-                <td>Outgoing Count</td>
-                <td>Total Transactions(to and from)</td>
-                <td>Mean</td>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.keys(transactions).map((key, i) => {
-                // console.log(key);
-                return (
-                  <tr key={key}>
-                    <td>{key}</td>
-                    <td>{incomingCount[key] ? incomingCount[key] : 0}</td>
-                    <td>{outgointCount[key] ? outgointCount[key] : 0}</td>
-                    <td>{transactions[key]}</td>
-                    <td>{mean[key] ? mean[key] : 0}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+            <h2>All Accounts Transaction Summary</h2>
+            <table>
+              <thead>
+                <tr>
+                  <td>Account No</td>
+                  <td>Incoming Count</td>
+                  <td>Outgoing Count</td>
+                  <td>Total Transactions(to and from)</td>
+                  <td>Mean</td>
+                </tr>
+              </thead>
+              <tbody>
+                {Object.keys(transactions).map((key, i) => {
+                  // console.log(key);
+                  return (
+                    <tr key={key}>
+                      <td>{key}</td>
+                      <td>{incomingCount[key] ? incomingCount[key] : 0}</td>
+                      <td>{outgointCount[key] ? outgointCount[key] : 0}</td>
+                      <td>{transactions[key]}</td>
+                      <td>{mean[key] ? mean[key] : 0}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
         <div className={styles.selectedUsergraphs}>
-            <div className={styles.graphs}>
+          <div className={styles.graphs}>
             <div>
               {/*Spending history*/}
 
@@ -166,10 +175,10 @@ const Report = () => {
               {/*Balance history*/}
               {balanceGraph && <img src={balanceGraph} alt="Bar Plot" />}
             </div>
-            </div>
+          </div>
         </div>
         <div className={styles.ml}>
-          <div>
+          <div className={styles.cycles}>
             {/* Cycle Patterns*/}
             {cycleNodes.map((val, index) => {
               return (
@@ -188,7 +197,7 @@ const Report = () => {
               );
             })}
           </div>
-          <div>
+          <div className={styles.hits}>
             {/* HITS*/}
             <h2>
               According to HITS we got the following nodes as Hubs and
@@ -209,7 +218,7 @@ const Report = () => {
               })}
             </div>
             <div>
-              <h5>Hubs</h5>
+              <h5>Authorities</h5>
               {Object.keys(authorities).map((key, i) => {
                 if (authorities[key] >= 0.1) {
                   return (
@@ -223,7 +232,7 @@ const Report = () => {
               })}
             </div>
           </div>
-          <div>
+          <div className={styles.pagerank}>
             {/* PageRank */}
             <h2>According to Page rank we got the following nodes:</h2>
 

@@ -13,6 +13,7 @@ import Select from '@mui/material/Select';
 import NativeSelect from '@mui/material/NativeSelect';
 import InputBase from '@mui/material/InputBase';
 import Switch from '@mui/material/Switch';
+import { useNavigate } from "react-router-dom";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -59,6 +60,7 @@ const Visualize = () => {
     const [suspiciousLinks, setSuspiciousLinks] = useState([]);
     const [isIncoming, setIsIncoming] = useState(false);
     const [hoveredElm, setHoveredElm] = useState();
+    const navigate = useNavigate();
 
     const NODE_R = 8;
     const data = useMemo(() => {
@@ -217,6 +219,10 @@ const Visualize = () => {
         }
     }
 
+    const generateReport = ()=>{
+        navigate("/visualize");
+    }
+
     useEffect(() => {
         console.log(fraudPattern);
         if(fraudPattern == "None"){
@@ -238,7 +244,7 @@ const Visualize = () => {
             </div>
 
             <div className={styles.toolbarContainer}>
-                <div className={styles.genReportTool}>Generate Reports</div>
+                <button className={styles.genReportTool} onClick={generateReport}>Generate Reports</button>
             </div>
             <div className={styles.workspaceContainer}>
                 <div className={styles.sidebarContainer}>
