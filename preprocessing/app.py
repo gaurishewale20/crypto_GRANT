@@ -8,6 +8,14 @@ from tabula.io import read_pdf
 from pathlib import Path
 import seaborn as sns
 from matplotlib import pyplot as plt
+from neo4j import GraphDatabase
+import networkx as nx
+
+uri = "bolt://localhost:7687"
+user = "neo4j"
+password = "Pablo123"
+driver = GraphDatabase.driver(uri, auth=(user, password))
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -224,6 +232,62 @@ async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], ac
     # do some additional preprocessing on the final dataframe here
     result_csv = result_df.to_csv(index=False)
     return {"result_csv": result_csv}
+
+@app.get("/pageRank")
+async def pageRank():
+    print("PageRank")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, 
+        t.txnDate AS TxnDate, t.valueDate AS ValueDate, 
+        t.description AS Description, t.refNo AS RefNoChequeNo, 
+        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    """
+
+    # Create empty graph
+    G = nx.DiGraph()
+
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            txn_date = record["TxnDate"]
+            value_date = record["ValueDate"]
+            description = record["Description"]
+            ref_no_cheque_no = record["RefNoChequeNo"]
+            debit = record["Debit"]
+            credit = record["Credit"]
+            balance = record["Balance"]
+
+            # Add sender and receiver nodes to graph
+            G.add_node(sender_bank_id)
+            G.add_node(receiver_bank_id)
+
+            # Add transaction edge to graph
+            G.add_edge(sender_bank_id, receiver_bank_id, 
+                    txn_date=txn_date, value_date=value_date, 
+                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
+                    debit=debit, credit=credit, balance=balance)
+            
+    pr = nx.pagerank(G)
+    nodes = []
+    scores = []
+
+    # Print the PageRank scores
+    for node, score in pr.items():
+        nodes.append(node)
+        scores.append(score)
+        print(f"Node {node}: PageRank score = {score}")
+
+    return {"nodes": nodes, "scores": scores}
+
+
+
+
 
 @app.get("/")
 async def root():
