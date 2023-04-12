@@ -5,67 +5,76 @@ import axios from "axios";
 import * as FileSaver from "file-saver";
 import { Buffer } from "buffer";
 const Report = () => {
-	const fetchVolumes = async (csvFile) => {
-		const formData = new FormData();
-		formData.append("file", csvFile);
-		axios
-			.post("http://127.0.0.1:8080/findVolumes", formData, {
-				headers: { "Content-Type": "multipart/form-data" },
-			})
-			.then((res) => {
-				setIncomingCount(res.data[0][1]);
-				setOutgointCount(res.data[1][1]);
-				setTransactions(res.data[2][1]);
-				setMean(res.data[3][1]);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+  const fetchVolumes = async (csvFile) => {
+    const formData = new FormData();
+    formData.append("file", csvFile);
+    axios
+      .post("http://127.0.0.1:8080/findVolumes", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        setIncomingCount(res.data[0][1]);
+        setOutgointCount(res.data[1][1]);
+        setTransactions(res.data[2][1]);
+        setMean(res.data[3][1]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-	const fetchSpends = async (csvFile, accountNo) => {
-		const formData = new FormData();
-		formData.append("file", csvFile);
+  const fetchSpends = async (csvFile, accountNo) => {
+    const formData = new FormData();
+    console.log(csvFile);
+    formData.append("file", csvFile);
 
-		axios
-			.post(
-				`http://127.0.0.1:8080/get_spend_analyser/${accountNo}`,
-				formData,
-				{
-					headers: { "Content-Type": "multipart/form-data" },
-				}
-			)
-			.then((res) => {
-				// console.log(res.data);
-				const url = window.URL.createObjectURL(new Blob([res.data]));
-				setSpendsGraph(url);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+    axios
+      .post(`http://127.0.0.1:8080/get_spend_analyser/${accountNo}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        const dataUrl = `data:image/png;base64,${res.data}`;
+        setSpendsGraph(dataUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-	const fetchBalanceHistory = async (csvFile, accountNo) => {
-		const formData = new FormData();
-		formData.append("file", csvFile);
-		axios
-			.post(
-				`http://127.0.0.1:8080/get_balance_history/${accountNo}`,
-				formData
-			)
-			.then((res) => {
-				const base64Image = Buffer.from(res.data).toString("base64");
-				setBalanceGraph(`data:image/png;base64,${base64Image}`);
-				// console.log(`data:image/png;base64,${base64Image}`);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+  const fetchBalanceHistory = async (csvFile, accountNo) => {
+    const formData = new FormData();
+    formData.append("file", csvFile);
+    axios
+      .post(
+        `http://127.0.0.1:8080/get_balance_history/${accountNo}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => {
+        const dataUrl = `data:image/png;base64,${res.data}`;
+        setBalanceGraph(dataUrl);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [accountNo, setAccountNo] = useState("");
+  const [incomingCount, setIncomingCount] = useState([]);
+  const [outgointCount, setOutgointCount] = useState([]);
+  const [transactions, setTransactions] = useState({});
+  const [mean, setMean] = useState([]);
+  const [balanceGraph, setBalanceGraph] = useState("");
+  const [spendsGraph, setSpendsGraph] = useState("");
 
 	const [cycleNodes, setCycleNodes] = useState([]);
-	const [hubs, setHubs] = useState([]);
-	const [authorities, setAuthorities] = useState([]);
+	const [hubs, setHubs] = useState({});
+	const [authorities, setAuthorities] = useState({});
 	const [pageRanks, setPageRanks] = useState([]);
 
 	const fetchCycles = async () => {
@@ -90,12 +99,10 @@ const Report = () => {
 		});
 	};
 
-	const [selectedFiles, setSelectedFiles] = useState([]);
-	const [accountNo, setAccountNo] = useState("");
 
-	const changeHandler = (event) => {
-		setSelectedFiles(event.target.files[0]);
-	};
+  const changeHandler = (event) => {
+    setSelectedFiles(event.target.files[0]);
+  };
 
 	const fetchData = async () => {
 		fetchSpends(selectedFiles, accountNo);
@@ -104,21 +111,8 @@ const Report = () => {
 		fetchCycles();
 	};
 
-	const [incomingCount, setIncomingCount] = useState([]);
-	const [outgointCount, setOutgointCount] = useState([]);
-	const [transactions, setTransactions] = useState([]);
-	const [mean, setMean] = useState([]);
-	const [balanceGraph, setBalanceGraph] = useState("");
-	const [spendsGraph, setSpendsGraph] = useState("");
-	// const [incomingCount, setIncomingCount] = useState([])
-
-	return (
-		<div className={styles.pageContainer}>
-			<div>
-				<div>Ankit</div>
-				<input type="file" onChange={changeHandler} />
-				<button onClick={fetchData}>Fetch Data</button>
-			</div>
+  return (
+    <div className={styles.pageContainer}>
 			<div className={styles.logoContainer}>
 				<img src={logo} alt="" />
 			</div>
@@ -160,22 +154,28 @@ const Report = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className={styles.selectedUsergraphs}>
-					<input
-						type="text"
-						onChange={(e) => setAccountNo(e.target.value)}
-						value={accountNo}
-					/>
-					<div>
-						{/*Balance history*/}
-						<img
-							src={balanceGraph}
-							// src="blob:http://localhost:3000/4fc8ba3d-ff0d-40db-ace4-0be5f52b4524"
-							alt="Balance"
-						/>
-					</div>
-					<div>{/*Spending history*/}</div>
-				</div>
+                <div className={styles.selectedUsergraphs}>
+          <input type="file" onChange={changeHandler} />
+          <input
+            type="text"
+            onChange={(e) => setAccountNo(e.target.value)}
+            value={accountNo}
+          />
+          <button className={styles.btn} onClick={fetchData}>
+            Get Details
+          </button>
+          <div>
+            <div>
+              {/*Spending history*/}
+
+              <img src={spendsGraph} alt="Bar Plot" />
+            </div>
+            <div>
+              {/*Balance history*/}
+              {balanceGraph && <img src={balanceGraph} alt="Bar Plot" />}
+            </div>
+          </div>
+        </div>
 				<div className={styles.ml}>
 					<div>{/* Fraud Patterns*/}</div>
 					<div>
@@ -241,7 +241,7 @@ const Report = () => {
 
 						<div>
 							<h5>Hubs</h5>
-							{pageRanks.nodes.map((val, i) => {
+							{pageRanks.nodes && pageRanks.nodes.map((val, i) => {
 								if (pageRanks.scores[i] >= 0.1) {
 									return (
 										<p>
@@ -258,6 +258,7 @@ const Report = () => {
 			</div>
 		</div>
 	);
+
 };
 
 export default Report;
