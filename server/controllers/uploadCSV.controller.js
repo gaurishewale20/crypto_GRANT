@@ -167,7 +167,7 @@ exports.extractData = async (req, res) => {
         .run(query)
         .then((result) => {
           // console.log(result);
-          result.records.forEach((record) => {
+          result.records.forEach((record, index) => {
             console.log(
               record.get("SenderBankID"),
               record.get("ReceiverBankID"),
@@ -183,6 +183,7 @@ exports.extractData = async (req, res) => {
               source: record.get("SenderBankID"),
               target: record.get("ReceiverBankID"),
               value: 1,
+              curvature: index/result.records.length,
             });
           });
         })
