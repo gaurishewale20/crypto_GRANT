@@ -187,27 +187,46 @@ def spendAnalyser(transactions, accountNo):
   plt.savefig('bar_plot')
   plt.close()
 
-# Sends a line plot graph of the accountNo's balance
-@app.get("/get_balance_history/{accountNo}")
-async def get_balance_history(accountNo : str):
-    filepath = os.path.join(BASE_DIR, "output_file1.csv")
-    csvFile = pd.read_csv(filepath)
+@app.post("/get_balance_history/{accountNo}")
+async def get_balance_history(accountNo : str, file: UploadFile):
+    file_location = os.path.join(BASE_DIR, file.filename)
+
+    # saving the file temporarily
+    with open(file_location, "wb+") as file_object:
+        file_object.write(file.file.read())
+    
+    csvFile = pd.read_csv(file_location)
+    
     balance_history(csvFile, int(accountNo))
     return FileResponse(os.path.join(BASE_DIR, "line_plot.png"), media_type='image/png')
 
-# Sends a bar plot graph of the accountNo's balance
-@app.get("/get_spend_analyser/{accountNo}")
-async def get_spend_analyser(accountNo : str):
-    filepath = os.path.join(BASE_DIR, "output_file1.csv")
-    csvFile = pd.read_csv(filepath)
-    spendAnalyser(csvFile,int(accountNo))
+@app.post("/get_spend_analyser/{accountNo}")
+async def get_spend_analyser(accountNo : str, file: UploadFile):
+    file_location = os.path.join(BASE_DIR, file.filename)
+
+    # saving the file temporarily
+    with open(file_location, "wb+") as file_object:
+        file_object.write(file.file.read())
+    
+    csvFile = pd.read_csv(file_location)
+    spendAnalyser(csvFile, int(accountNo))
     return FileResponse(os.path.join(BASE_DIR, "bar_plot.png"), media_type='image/png')
 
-'''
-Note:
-output_file1.csv : contains newly added amount_transferred column which was not present in the existing file ("output_file.csv").
-This needs to be the generated common format file (...so might need to change in above functions)
-'''
+@app.post("/findVolumes")
+async def findVolumesAPI(file: UploadFile):
+    file_location = os.path.join(BASE_DIR, file.filename)
+
+    # saving the file temporarily
+    with open(file_location, "wb+") as file_object:
+        file_object.write(file.file.read())
+    
+    csvFile = pd.read_csv(file_location)
+    incomingCount, outgoingCount, tranCount, mean = findVolumes(csvFile)
+    return [("incomingCount", incomingCount),("outgoingCount", outgoingCount),("tranCount", tranCount),("mean", mean)]
+    # return JSONResponse(content={incomingCount, outgoingCount, tranCount, mean})
+
+    # return {incomingCount, outgoingCount, tranCount, mean}
+
 
 @app.post("/preprocess_csv_files")
 async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], accountNos: list[str]):
