@@ -419,9 +419,15 @@ async def cycles():
                     debit=debit, credit=credit, balance=balance)
             
     print("========CYCLES=======")
-    accounts = list(nx.simple_cycles(G))
 
-    return {"accounts": accounts}
+    # accounts = list(nx.simple_cycles(G))
+    cycles = list(nx.simple_cycles(graph))
+    result = []
+    for cycle in cycles:
+        if len(cycle) > 3:
+            result.append(cycle)
+
+    return {"cycles": result}
 
 @app.get("/pageRank")
 async def pageRank():
