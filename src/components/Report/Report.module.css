@@ -11,6 +11,7 @@
 
 .logoContainer img{
     height: 3rem;
+    background-image: linear-gradient(to bottom, rgb(28, 28, 28), black);
 }
 
 .workspaceContainer,.tables{
@@ -20,6 +21,12 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+.workspaceContainer{
+    background-color: rgb(247, 245, 245);
+}
+.tables{
+    margin: 20px 0;
 }
 
 .toolbarContainer{
@@ -58,5 +65,23 @@
 
 .graphs{
     display: flex;
-    width: 50%;
+    gap: 16px;
+}
+
+.img{
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+}
+.ml{
+    color: black;
+}
+
+.hits, .cycles, .pagerank{
+    margin: 2rem;
+}
+
+
+.p h2{
+    font-size: 20px;
 }
