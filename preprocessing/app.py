@@ -419,13 +419,18 @@ async def cycles():
                     debit=debit, credit=credit, balance=balance)
             
     print("========CYCLES=======")
+    # Find cycles in the graph
+    cycles = list(nx.simple_cycles(G, length_bound=None))
 
-    # accounts = list(nx.simple_cycles(G))
-    cycles = list(nx.simple_cycles(graph))
+    # Filter out cycles of length 3 or less
     result = []
     for cycle in cycles:
-        if len(cycle) > 3:
-            result.append(cycle)
+        if len(cycle) > 1:
+            # Get ref no of transactions in cycle
+            refs = [G.edges[u, v]["ref_no_cheque_no"] for u, v in zip(cycle, cycle[1:]+[cycle[0]])]
+            result.append({"nodes": cycle, "transactions": refs})
+
+    print(result)
 
     return {"cycles": result}
 
