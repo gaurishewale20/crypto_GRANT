@@ -137,10 +137,11 @@ const Home = () => {
 
                 var newFormData = new FormData();
                 newFormData.append("files", blob);
+                newFormData.append("name", "Investigation 1");
 
                 axios
                     .post("http://localhost:5000/", newFormData, {
-                        headers: { "Content-Type": "multipart/form-data" },
+                        headers: { "Content-Type": "multipart/form-data", "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM3MzY4MjQ4M2ZiNDcxZWJlMzQyMmQiLCJpYXQiOjE2ODEzNDAwNDIsImV4cCI6MTY4MTk0NDg0Mn0.cd81aLVoNLI4pvIZUHZwvgtNMTXd2h3wLkEzPR_EuTA" },
                     })
                     .then((res) => {
                         console.log(res);

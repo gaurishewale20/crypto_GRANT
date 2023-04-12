@@ -30,15 +30,16 @@ exports.uploadCSVController = async (req, res) => {
 
 		let inputFile = Buffer.from(file.buffer).toString();
 		console.log("inpppppp", inputFile);
-		fs.writeFile("input.csv", inputFile, (err) => {
-			if (!err) console.log("Data written");
+		let base64data = "";
+		await fs.writeFile("input.csv", inputFile, (err) => {
+			if (!err){
+				console.log("Data written");
+				const csvFile = fs.readFileSync("input.csv");
+				base64data = Buffer.from(csvFile).toString("base64");
+			}
 		});
-
-		const csvFile = fs.readFileSync("path/to/csv/file.csv");
-
-		// Convert CSV to base64 string
-		const base64Data = Buffer.from(csvFile).toString("base64");
-
+		console.log("Base64");
+		console.log(base64data);
 		fs.createReadStream("input.csv")
 			.pipe(csv())
 			.on("data", (row) => {
@@ -66,7 +67,7 @@ exports.uploadCSVController = async (req, res) => {
 						const inves = new Investigation({
 							name: name,
 							user: req.user._id,
-							file: base64Data,
+							file: base64data,
 						});
 						inves
 							.save()
