@@ -43,10 +43,11 @@ exports.uploadCSVController = async (req, res) => {
           receiverBankId: row["Recipient No"],
           valueDate: row["Value Date"],
           description: row["Description"],
-          refNo: row["Ref No./Cheque No."],
+          refNo: parseFloat(row["Ref No./Cheque No."]),
           debit: parseFloat(row["Debit"]),
           credit: parseFloat(row["Credit"]),
           balance: parseFloat(row["Balance"]),
+          amount: parseFloat(row["Amount"]),
           bank: row["Bank"],
         });
       })
@@ -55,7 +56,7 @@ exports.uploadCSVController = async (req, res) => {
         createNodesAndEdges(transactions)
           .then(() => {
             console.log("All transactions processed successfully");
-            res.send({"message": "done"});
+            res.send({ message: "done" });
             driver.close();
           })
           .catch((error) => {
@@ -69,32 +70,56 @@ exports.uploadCSVController = async (req, res) => {
 
     // Define the function that creates the nodes and relationships
     async function createNodesAndEdges(transactions) {
-      console.log(transactions);
+      console.log("transactions",transactions);
       const session = driver.session();
-      console.log(session);
+      // console.log(session);
       try {
         for (const transaction of transactions) {
           // Create the sender and receiver bank nodes, if they don't exist already
           const senderBankId = transaction.senderBankId;
           const receiverBankId = transaction.receiverBankId;
-
-          await session.run("MERGE (sender:Bank {id: $senderBankId})", {
-            senderBankId,
-          });
-          await session.run("MERGE (receiver:Bank {id: $receiverBankId})", {
-            receiverBankId,
-          });
-
-          // Create the TRANSACTION relationship between the banks
-          await session.run(
-            "MATCH (sender:Bank {id: $senderBankId}), (receiver:Bank {id: $receiverBankId}) \
-         CREATE (sender)-[:TRANSACTION {txnDate: $txnDate, valueDate: $valueDate, description: $description, refNo: $refNo, debit: $debit, credit: $credit, balance: $balance}]->(receiver)",
-            { senderBankId, receiverBankId, ...transaction }
+          const refNo = transaction.refNo;
+          
+          let result2 = await session.run(
+            "MATCH (sender:Bank )-[t:TRANSACTION {refNo: $refNo}]->(receiver:Bank) RETURN  t.refNo AS RefNoChequeNo",
+            {
+              refNo
+            }
           );
+          console.log("result2", result2.records.length);
+          // const list = new Array(result);
+          // let flag = 0
 
-          console.log(
-            `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}`
-          );
+          // console.log("list", list[0].records.length);
+          // for (let i = 0; i < list[0].records.length; i++) {
+          //   console.log("lisssttt", list[0].records[i].get("RefNoChequeNo"))
+          //   if (refNo == list[0].records[i].get("RefNoChequeNo")) {
+          //     console.log(
+          //       `Transaction is already added with senderId=${senderBankId}, recipientId=${receiverBankId} and refNo=${refNo}`
+          //     );
+          //     flag = 1;
+          //     break;
+          //   }
+          // }
+          if (result2.records.length==0) {
+            await session.run("MERGE (sender:Bank {id: $senderBankId})", {
+              senderBankId,
+            });
+            await session.run("MERGE (receiver:Bank {id: $receiverBankId})", {
+              receiverBankId,
+            });
+
+            // Create the TRANSACTION relationship between the banks
+            await session.run(
+              "MATCH (sender:Bank {id: $senderBankId}), (receiver:Bank {id: $receiverBankId}) \
+           CREATE (sender)-[:TRANSACTION {txnDate: $txnDate, valueDate: $valueDate, description: $description, refNo: $refNo, debit: $debit, credit: $credit, balance: $balance, amount: $amount}]->(receiver)",
+              { senderBankId, receiverBankId, ...transaction }
+            );
+
+            console.log(
+              `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}, amount=${transaction.amount}`
+            );
+          }
         }
       } finally {
         await session.close();
@@ -121,53 +146,55 @@ exports.extractData = async (req, res) => {
     RETURN b.id
   `;
 
-  session.run(nodeFetchQuery).then((result) => {
-    // console.log(result.records);
-    result.records.forEach((record) => {
-      nodes.push({'id': record.get('b.id'), 'group': 1});
-    });
-  }).catch((error) => {
-    console.error(error);
-  }).finally(() => {
-
-    const query = `
-    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
-    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, t.txnDate AS TxnDate, t.valueDate AS ValueDate, t.description AS Description, t.refNoChequeNo AS RefNoChequeNo, t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
-  `;
-
   session
-    .run(query)
+    .run(nodeFetchQuery)
     .then((result) => {
-      // console.log(result);
+      // console.log(result.records);
       result.records.forEach((record) => {
-        console.log(
-          record.get("SenderBankID"),
-          record.get("ReceiverBankID"),
-          record.get("TxnDate"),
-          record.get("ValueDate"),
-          record.get("Description"),
-          record.get("RefNoChequeNo"),
-          record.get("Debit"),
-          record.get("Credit"),
-          record.get("Balance")
-        );
-        links.push({
-          'source': record.get("SenderBankID"),
-          'target': record.get("ReceiverBankID"),
-          'value': 1
-        });
+        nodes.push({ id: record.get("b.id"), group: 1 });
       });
     })
     .catch((error) => {
       console.error(error);
     })
     .finally(() => {
-      session.close();
-      driver.close();
-      res.send({nodes, links});
+      const query = `
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, t.txnDate AS TxnDate, t.valueDate AS ValueDate, t.description AS Description, t.refNo AS RefNoChequeNo, t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+  `;
+
+      session
+        .run(query)
+        .then((result) => {
+          // console.log(result);
+          result.records.forEach((record) => {
+            console.log(
+              record.get("SenderBankID"),
+              record.get("ReceiverBankID"),
+              record.get("TxnDate"),
+              record.get("ValueDate"),
+              record.get("Description"),
+              record.get("RefNoChequeNo"),
+              record.get("Debit"),
+              record.get("Credit"),
+              record.get("Balance")
+            );
+            links.push({
+              source: record.get("SenderBankID"),
+              target: record.get("ReceiverBankID"),
+              value: 1,
+            });
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        })
+        .finally(() => {
+          session.close();
+          driver.close();
+          res.send({ nodes, links });
+        });
     });
-  });
-  
 };
 
 exports.pageRank = async (req, res) => {
@@ -194,9 +221,9 @@ exports.pageRank = async (req, res) => {
   `;
 
   session
-    .run(query)
+    .run(nodeFetchQuery)
     .then((result) => {
-      // console.log(result);
+      // console.log(result.records);
       result.records.forEach((record) => {
         results.push(record.get('node'), record.get('score'));
       });

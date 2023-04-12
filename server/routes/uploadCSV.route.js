@@ -1,5 +1,12 @@
 const express = require("express");
-const { uploadCSVController, extractData, pageRank, getCycles, eigenVectorCentrality} = require("../controllers/uploadCSV.controller");
+
+const {
+	uploadCSVController,
+	extractData,
+	pageRank,
+	getCycles,
+	eigenVectorCentrality,
+} = require("../controllers/uploadCSV.controller");
 const upload = require("multer")();
 
 const router = express.Router();
