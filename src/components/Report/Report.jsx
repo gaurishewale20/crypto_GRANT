@@ -72,17 +72,17 @@ const Report = () => {
   const [balanceGraph, setBalanceGraph] = useState("");
   const [spendsGraph, setSpendsGraph] = useState("");
 
-	const [cycleNodes, setCycleNodes] = useState([]);
-	const [hubs, setHubs] = useState({});
-	const [authorities, setAuthorities] = useState({});
-	const [pageRanks, setPageRanks] = useState([]);
+  const [cycleNodes, setCycleNodes] = useState([]);
+  const [hubs, setHubs] = useState({});
+  const [authorities, setAuthorities] = useState({});
+  const [pageRanks, setPageRanks] = useState([]);
 
-	const fetchCycles = async () => {
-		axios.get("http://127.0.0.1:8080/cycles").then((res) => {
-			console.log(res.data);
-			setCycleNodes(res.data.cycles);
-		});
-	};
+  const fetchCycles = async () => {
+    axios.get("http://127.0.0.1:8080/cycles").then((res) => {
+      console.log(res.data);
+      setCycleNodes(res.data.cycles);
+    });
+  };
 
 	const fetchHITS = async () => {
 		axios.get("http://127.0.0.1:8080/hits").then((res) => {
@@ -99,64 +99,28 @@ const Report = () => {
 		});
 	};
 
-
   const changeHandler = (event) => {
     setSelectedFiles(event.target.files[0]);
   };
 
-	const fetchData = async () => {
-		fetchSpends(selectedFiles, accountNo);
-		fetchBalanceHistory(selectedFiles, accountNo);
-		fetchVolumes(selectedFiles);
-		fetchCycles();
-		fetchHITS();
-		fetchPageRank();
+  const fetchData = async () => {
+	fetchSpends(selectedFiles, accountNo);
+	fetchBalanceHistory(selectedFiles, accountNo);
+	fetchVolumes(selectedFiles);
+	fetchCycles();
+	fetchHITS();
+	fetchPageRank();
 	};
+  
 
   return (
     <div className={styles.pageContainer}>
-			<div className={styles.logoContainer}>
-				<img src={logo} alt="" />
-			</div>
-			<div className={styles.workspaceContainer}>
-				<div className={styles.allAccountsTxnCount}>
-					<div>{/*  All Accounts*/}</div>
-					{/* Displays find Volume data */}
-					<table>
-						<thead>
-							<tr>
-								<td>Account No</td>
-								<td>Incoming Count</td>
-								<td>Outgoing Count</td>
-								<td>Total Transactions(to and from)</td>
-								<td>Mean</td>
-							</tr>
-						</thead>
-						<tbody>
-							{Object.keys(transactions).map((key, i) => {
-								return (
-									<tr key={key}>
-										<td>{key}</td>
-										<td>
-											{incomingCount[key]
-												? incomingCount[key]
-												: 0}
-										</td>
-										<td>
-											{outgointCount[key]
-												? outgointCount[key]
-												: 0}
-										</td>
-										<td>{transactions[key]}</td>
-										<td>{mean[key] ? mean[key] : 0}</td>
-									</tr>
-								);
-							})}
-						</tbody>
-					</table>
-				</div>
-                <div className={styles.selectedUsergraphs}>
-          <input type="file" onChange={changeHandler} />
+      <div className={styles.logoContainer}>
+        <img src={logo} alt="" />
+      </div>
+      <div className={styles.workspaceContainer}>
+        <div className={styles.allAccountsTxnCount}>
+        <input type="file" onChange={changeHandler} />
           <input
             type="text"
             onChange={(e) => setAccountNo(e.target.value)}
@@ -165,7 +129,37 @@ const Report = () => {
           <button className={styles.btn} onClick={fetchData}>
             Get Details
           </button>
-          <div>
+          {/* Displays find Volume data */}
+          <div className={styles.tables}>
+          <table>
+            <thead>
+              <tr>
+                <td>Account No</td>
+                <td>Incoming Count</td>
+                <td>Outgoing Count</td>
+                <td>Total Transactions(to and from)</td>
+                <td>Mean</td>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.keys(transactions).map((key, i) => {
+                // console.log(key);
+                return (
+                  <tr key={key}>
+                    <td>{key}</td>
+                    <td>{incomingCount[key] ? incomingCount[key] : 0}</td>
+                    <td>{outgointCount[key] ? outgointCount[key] : 0}</td>
+                    <td>{transactions[key]}</td>
+                    <td>{mean[key] ? mean[key] : 0}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div className={styles.selectedUsergraphs}>
+            <div className={styles.graphs}>
             <div>
               {/*Spending history*/}
 
@@ -175,8 +169,9 @@ const Report = () => {
               {/*Balance history*/}
               {balanceGraph && <img src={balanceGraph} alt="Bar Plot" />}
             </div>
-          </div>
+            </div>
         </div>
+        
 				<div className={styles.ml}>
 					<div>{/* Fraud Patterns*/}</div>
 					<div>
@@ -222,7 +217,7 @@ const Report = () => {
 							})}
 						</div>
 						<div>
-							<h5>Hubs</h5>
+							<h5>Authorities</h5>
 							{Object.keys(authorities).map((key, i) => {
 								if (authorities[key] >= 0.1) {
 									return (
