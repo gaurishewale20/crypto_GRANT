@@ -54,7 +54,7 @@ const Visualize = () => {
     const [allAccounts, setAllAccounts] = useState([]);
     const [graphData, setGraphData] = useState({nodes: [], links: []});
     const [fraudPattern, setFraudPattern] = useState("None");
-    const patterns = ["Cyclic Flow", "Money Laundering", "Hits", "Geographic"];
+    const patterns = ["Cyclic Flow", "Money Laundering", "Hits", "Geographic", "Cluster"];
     const [suspiciousNodes, setSuspiciousNodes] = useState([]);
     const [suspiciousLinks, setSuspiciousLinks] = useState([]);
     const [isIncoming, setIsIncoming] = useState(false);
@@ -232,6 +232,30 @@ const Visualize = () => {
         }
     }
 
+    const fetchCluster = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/connectedComponents');
+            console.log(res.data);
+            const {components} = res.data;
+            components.forEach((compList) => {
+                const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                compList.forEach((node) => {
+                    const newData = data.nodes.map((ogNode) => {
+                        if(ogNode.id == node){
+                            ogNode.color = `#${randomColor}`;
+                        }
+                        return ogNode;
+                    });
+                    console.log(newData);
+                    data.nodes = newData;
+                })
+            });
+            
+        } catch(e){
+            console.log(e);
+        }
+    }
+
     useEffect(() => {
         console.log(fraudPattern);
         if(fraudPattern == "None"){
@@ -245,6 +269,10 @@ const Visualize = () => {
             fetchHits();
         }else if(fraudPattern == "Geographic"){
             fetchGeographicFraud();
+        }else if(fraudPattern == "Cluster"){
+            setSuspiciousNodes([]);
+            setSuspiciousLinks([]);
+            fetchCluster();
         }
     }, [fraudPattern]);
 
@@ -334,7 +362,6 @@ const Visualize = () => {
                                     linkDirectionalArrowRelPos={1}
                                     linkCurvature="curvature"
                                     onNodeHover={(node) => {
-                                        console.log(node);
                                         setHoveredElm(node);
                                     }}
                                     nodeLabel="id"
