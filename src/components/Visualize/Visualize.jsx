@@ -54,7 +54,7 @@ const Visualize = () => {
     const [allAccounts, setAllAccounts] = useState([]);
     const [graphData, setGraphData] = useState({nodes: [], links: []});
     const [fraudPattern, setFraudPattern] = useState("None");
-    const patterns = ["Cyclic Flow", "Money Laundering", "Hits"];
+    const patterns = ["Cyclic Flow", "Money Laundering", "Hits", "Geographic"];
     const [suspiciousNodes, setSuspiciousNodes] = useState([]);
     const [suspiciousLinks, setSuspiciousLinks] = useState([]);
     const [isIncoming, setIsIncoming] = useState(false);
@@ -216,6 +216,21 @@ const Visualize = () => {
             console.log(e);
         }
     }
+    
+    const fetchGeographicFraud = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/location');
+            const tempSuspiciousList = [];
+            const locationData = res.data.locations_and_accounts;
+            locationData.forEach((nodeLoc, index) => {
+                tempSuspiciousList.push(data.nodes.find((n) => n.id == nodeLoc.node));
+            });
+            setSuspiciousNodes(tempSuspiciousList);
+            setSuspiciousLinks([]);
+        } catch(e){
+            console.log(e);
+        }
+    }
 
     useEffect(() => {
         console.log(fraudPattern);
@@ -228,6 +243,8 @@ const Visualize = () => {
             fetchPageRank();
         }else if(fraudPattern == "Hits"){
             fetchHits();
+        }else if(fraudPattern == "Geographic"){
+            fetchGeographicFraud();
         }
     }, [fraudPattern]);
 
@@ -321,6 +338,7 @@ const Visualize = () => {
                                         setHoveredElm(node);
                                     }}
                                     nodeLabel="id"
+                                    linkLabel={(link) => `₹${link.amount}<br/>${link.txnDate}`}
                                 />
                             </>
                         )}
