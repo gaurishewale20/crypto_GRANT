@@ -5,6 +5,9 @@
     flex-direction: column;
     padding: 2rem;
 }
+.pageContainer p{
+    color: black;
+}
 
 .logoContainer img{
     height: 3rem;
@@ -21,6 +24,9 @@
 }
 .workspaceContainer{
     background-color: rgb(247, 245, 245);
+}
+.tables{
+    margin: 20px 0;
 }
 
 .toolbarContainer{
@@ -59,13 +65,23 @@
 
 .graphs{
     display: flex;
-    /* width: 50%; */
+    gap: 16px;
 }
 
+.img{
+    flex: 1;
+    max-width: 100%;
+    height: auto;
+}
 .ml{
     color: black;
 }
 
 .hits, .cycles, .pagerank{
     margin: 2rem;
+}
+
+
+.p h2{
+    font-size: 20px;
 }

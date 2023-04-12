@@ -4,7 +4,10 @@ import logo from "../../assets/logo.svg";
 import axios from "axios";
 import * as FileSaver from "file-saver";
 import { Buffer } from "buffer";
-const Report = () => {
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
+const ReportPage = () => {
   const fetchVolumes = async (csvFile) => {
     const formData = new FormData();
     formData.append("file", csvFile);
@@ -87,13 +90,13 @@ const Report = () => {
   const fetchHITS = async () => {
     axios.get("http://127.0.0.1:8080/hits").then((res) => {
       console.log(res.data);
-      setHubs(res.data.hubs);
-      setAuthorities(res.data.authorities);
+      setHubs(res.data.Hubs);
+      setAuthorities(res.data.Authorities);
     });
   };
 
   const fetchPageRank = async () => {
-    axios.get("http://127.0.0.1:8080/").then((res) => {
+    axios.get("http://127.0.0.1:8080/pageRank").then((res) => {
       console.log(res.data);
       setPageRanks(res.data);
     });
@@ -108,20 +111,14 @@ const Report = () => {
     fetchBalanceHistory(selectedFiles, accountNo);
     fetchVolumes(selectedFiles);
     fetchCycles();
+    fetchHITS();
+    fetchPageRank();
   };
 
-  const handleDownloadPdf = ()=>{
-    const pdfBlob = new Blob([<Report />], { type: 'application/pdf' });
-    // Trigger the download of the Blob as a file
-    saveAs(pdfBlob, 'example.pdf');
-  }
   return (
     <div className={styles.pageContainer}>
       <div className={styles.logoContainer}>
         <img src={logo} alt="" />
-      </div>
-      <div className={styles.toolbarContainer}>
-        <button className={styles.genReportTool} onClick={handleDownloadPdf}>Download Report</button>
       </div>
       <div className={styles.workspaceContainer}>
         <div className={styles.allAccountsTxnCount}>
@@ -169,23 +166,25 @@ const Report = () => {
             <div>
               {/*Spending history*/}
 
-              <img src={spendsGraph} alt="Bar Plot" />
-            </div>
-            <div>
+              { spendsGraph && <img src={spendsGraph} alt="Bar Plot" />}
               {/*Balance history*/}
               {balanceGraph && <img src={balanceGraph} alt="Bar Plot" />}
             </div>
           </div>
         </div>
+
         <div className={styles.ml}>
+          <div>{/* Fraud Patterns*/}</div>
           <div className={styles.cycles}>
             {/* Cycle Patterns*/}
             {cycleNodes.map((val, index) => {
+              // console.log(val);
               return (
                 <div>
                   <h2>Cycle {index + 1}: </h2>
                   <div>
                     {val.nodes.map((node, i) => {
+                      // console.log(node);
                       return (
                         <p>
                           {node} : {val.transactions[i]}
@@ -206,7 +205,7 @@ const Report = () => {
             <div>
               <h5>Hubs</h5>
               {Object.keys(hubs).map((key, i) => {
-                if (hubs[key] > 0.1) {
+                if (hubs[key] > 0.01) {
                   return (
                     <p>
                       {key} : {hubs[key]}
@@ -232,14 +231,15 @@ const Report = () => {
               })}
             </div>
           </div>
-          <div className={styles.pagerank}>
+          <div className={styles.pageRank}>
             {/* PageRank */}
             <h2>According to Page rank we got the following nodes:</h2>
 
             <div>
-              <h5>Hubs</h5>
+              <h5>Page Rank</h5>
               {pageRanks.nodes &&
                 pageRanks.nodes.map((val, i) => {
+                  console.log(pageRanks);
                   if (pageRanks.scores[i] >= 0.1) {
                     return (
                       <p>
@@ -256,6 +256,38 @@ const Report = () => {
       </div>
     </div>
   );
-};
+}
 
+
+const Report = () => {
+    const handleDownloadPDF = () => {
+        // Create a new jsPDF instance
+        const pdf = new jsPDF();
+    
+        // Get the DOM element for the div to be downloaded
+        const divElement = document.getElementById('pdf-div');
+    
+        // Convert the div element to a canvas
+        html2canvas(divElement).then(canvas => {
+          // Get the data URL from the canvas
+          const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+    
+          // Add the image data URL to the PDF
+          pdf.addImage(dataUrl, 'JPEG', 0, 0, pdf.internal.pageSize.width, pdf.internal.pageSize.height);
+    
+          // Save the PDF
+          pdf.save('downloaded_pdf.pdf');
+     });
+    }
+    return (
+        <>
+
+        <button className={styles.btn} onClick={handleDownloadPDF}>Download Report</button>
+      
+        <div id="pdf-div">
+            <ReportPage/>
+        </div>
+        </>
+    )
+}
 export default Report;
