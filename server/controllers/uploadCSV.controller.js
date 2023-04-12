@@ -68,21 +68,22 @@ exports.uploadCSVController = async (req, res) => {
 							user: req.user._id,
 							file: base64Data,
 						});
-						inves.save((err, result) => {
-							if (err) {
-								return res.status(400).json({
-									error:
-										"Some error occured! Please try again" +
-										err,
-								});
-							} else {
+						inves
+							.save()
+							.then((result) => {
 								return res.status(200).json({
 									success: true,
 									message:
 										"Investigation added successfully!",
 								});
-							}
-						});
+							})
+							.catch((err) => {
+								return res.status(400).json({
+									error:
+										"Some error occured! Please try again" +
+										err,
+								});
+							});
 						driver.close();
 					})
 					.catch((error) => {
