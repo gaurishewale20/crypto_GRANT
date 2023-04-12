@@ -2,7 +2,7 @@ import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Visualize from "./components/Visualize/Visualize";
-import Temp from "./components/temp";
+import Report from "./components/Report/Report";
 
 function App() {
 	const router = createBrowserRouter([
@@ -15,21 +15,21 @@ function App() {
 			),
 		},
 		{
-			path: "/fetch",
+			path: "/visualize",
 			element: (
 				<>
-					<Temp />
+					<Visualize />
 				</>
 			),
 		},
-		// {
-		// 	path: "/visualize",
-		// 	element: (
-		// 		<>
-		// 			<Visualize />
-		// 		</>
-		// 	),
-		// },
+		{
+			path: "/report",
+			element: (
+				<>
+					<Report />
+				</>
+			),
+		},
 	]);
 
 	return (

@@ -1,0 +1,21 @@
+.pageContainer{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to bottom, rgb(28, 28, 28), black);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.logoContainer img{
+    height: 3rem;
+}
+
+.workspaceContainer{
+    flex: 1;
+    background-color: #353535;
+    border-radius: 8px 0 8px 8px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
