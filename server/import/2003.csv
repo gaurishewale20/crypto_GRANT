@@ -1,0 +1,4 @@
+Txn Date,Recipient No,Value Date,Description,Ref No./Cheque No.,Debit,Credit,Balance,Location
+7/4/2022,1000,7/4/2022,ATM Withdrawal,1234567895,0,1000,12000,Canada
+7/4/2022,1000,7/4/2022,ATM Withdrawal,1234567896,0,1000,12000,USA
+8/4/2022,1000,8/4/2022,Salary Transfer,1234567897,15000,0,29000,India

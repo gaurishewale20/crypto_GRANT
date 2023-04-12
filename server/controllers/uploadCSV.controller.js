@@ -49,6 +49,7 @@ exports.uploadCSVController = async (req, res) => {
           balance: parseFloat(row["Balance"]),
           amount: parseFloat(row["Amount"]),
           bank: row["Bank"],
+          location: row["Location"],
         });
       })
       .on("end", () => {
@@ -76,9 +77,11 @@ exports.uploadCSVController = async (req, res) => {
       try {
         for (const transaction of transactions) {
           // Create the sender and receiver bank nodes, if they don't exist already
-          const senderBankId = transaction.senderBankId;
-          const receiverBankId = transaction.receiverBankId;
+          const senderBankId = `${parseInt(transaction.senderBankId)}`;
+          const receiverBankId = `${parseInt(transaction.receiverBankId)}`;
           const refNo = transaction.refNo;
+          transaction.senderBankId = senderBankId;
+          transaction.receiverBankId = receiverBankId;
 
           let result2 = await session.run(
             "MATCH (sender:Bank )-[t:TRANSACTION {refNo: $refNo}]->(receiver:Bank) RETURN  t.refNo AS RefNoChequeNo",
@@ -108,24 +111,26 @@ exports.uploadCSVController = async (req, res) => {
             await session.run("MERGE (receiver:Bank {id: $receiverBankId})", {
               receiverBankId,
             });
+            console.log(senderBankId);
+            console.log(receiverBankId);
 
             // Create the TRANSACTION relationship between the banks
             await session.run(
               "MATCH (sender:Bank {id: $senderBankId}), (receiver:Bank {id: $receiverBankId}) \
-           CREATE (sender)-[:TRANSACTION {txnDate: $txnDate, valueDate: $valueDate, description: $description, refNo: $refNo, debit: $debit, credit: $credit, balance: $balance, amount: $amount}]->(receiver)",
+           CREATE (sender)-[:TRANSACTION {txnDate: $txnDate, valueDate: $valueDate, description: $description, refNo: $refNo, debit: $debit, credit: $credit, balance: $balance, amount: $amount, location: $location}]->(receiver)",
               { senderBankId, receiverBankId, ...transaction }
             );
 
             console.log(
-              `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}, amount=${transaction.amount}`
+              `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}, amount=${transaction.amount}, location=${transaction.location}`
             );
-            fs.unlink("./input.csv", (err) => {
-              if (err) {
-                throw err;
-              }
+            // fs.unlink("./input.csv", (err) => {
+            //   if (err) {
+            //     throw err;
+            //   }
 
-              console.log("Deleted File successfully.");
-            });
+            //   console.log("Deleted File successfully.");
+            // });
           }
         }
       } finally {
@@ -167,14 +172,14 @@ exports.extractData = async (req, res) => {
     .finally(() => {
       const query = `
     MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
-    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, t.txnDate AS TxnDate, t.valueDate AS ValueDate, t.description AS Description, t.refNo AS RefNoChequeNo, t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, t.txnDate AS TxnDate, t.valueDate AS ValueDate, t.description AS Description, t.refNo AS RefNoChequeNo, t.debit AS Debit, t.credit AS Credit, t.balance AS Balance, t.location AS Location
   `;
 
       session
         .run(query)
         .then((result) => {
           // console.log(result);
-          result.records.forEach((record) => {
+          result.records.forEach((record, index) => {
             console.log(
               record.get("SenderBankID"),
               record.get("ReceiverBankID"),
@@ -184,12 +189,15 @@ exports.extractData = async (req, res) => {
               record.get("RefNoChequeNo"),
               record.get("Debit"),
               record.get("Credit"),
-              record.get("Balance")
+              record.get("Balance"),
+              record.get("Location")
             );
             links.push({
               source: record.get("SenderBankID"),
               target: record.get("ReceiverBankID"),
+              refNo: record.get("RefNoChequeNo"),
               value: 1,
+              curvature: index/result.records.length,
             });
           });
         })

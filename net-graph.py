@@ -76,6 +76,13 @@ def find_cycles(graph):
 
 
 
+def strongly_connected(graph):
+    print("============strongly connected=============")
+    components = list(nx.strongly_connected_components(graph))
+    print(components)
+
+
+
 def centralities(G):
     print("==========Centrality Measures==========")
     # degree centrality
@@ -108,6 +115,7 @@ pagerank(G)
 find_cycles(G)
 centralities(G)
 apply_hits(G)
+strongly_connected(G)
 
 
 

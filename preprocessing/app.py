@@ -42,9 +42,9 @@ columnNames = {
 }
 
 bankColumnNames = {
-    "hdfc": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"],
-    "sbi": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"],
-    "icici": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"]
+    "hdfc": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"],
+    "sbi": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"],
+    "icici": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"]
 }
 
 # TODO: convert all columns to a common column name of all CSV files
@@ -57,11 +57,13 @@ def preprocessFile(transactions, bankName, accountNo):
     transactions = transactions.assign(Bank=bankName)
     # transactions = transactions.assign(SenderNo=accountNo)
     transactions["Sender No"] = accountNo
+    transactions["Sender No"] = transactions["Sender No"].astype(str)
+    transactions["Recipient No"] = transactions["Recipient No"].astype(str)
     print(transactions)
     # Select columns that we need
-    transactions = transactions[["Txn Date", "Sender No", "Recipient No", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Bank"]]
+    transactions = transactions[["Txn Date", "Sender No", "Recipient No", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Bank", "Location"]]
 
-    print(transactions)
+    print("Here",transactions)
     # Add 0 to credit and debit null values
     transactions['Credit'] = transactions['Credit'].fillna(0)
     transactions['Debit'] = transactions['Debit'].fillna(0)
@@ -430,12 +432,12 @@ async def cycles():
             
     print("========CYCLES=======")
     # Find cycles in the graph
-    cycles = list(nx.simple_cycles(G, length_bound=None))
-
+    cycles = list(nx.simple_cycles(G))
+    print(cycles)
     # Filter out cycles of length 3 or less
     result = []
     for cycle in cycles:
-        if len(cycle) > 1:
+        if len(cycle) > 3:
             # Get ref no of transactions in cycle
             refs = [G.edges[u, v]["ref_no_cheque_no"] for u, v in zip(cycle, cycle[1:]+[cycle[0]])]
             result.append({"nodes": cycle, "transactions": refs})
@@ -501,6 +503,146 @@ async def pageRank():
 
 
 
+@app.get("/connectedComponents")
+async def connected_components():
+    print("PageRank")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, 
+        t.txnDate AS TxnDate, t.valueDate AS ValueDate, 
+        t.description AS Description, t.refNo AS RefNoChequeNo, 
+        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    """
+
+    # Create empty graph
+    G = nx.DiGraph()
+
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            txn_date = record["TxnDate"]
+            value_date = record["ValueDate"]
+            description = record["Description"]
+            ref_no_cheque_no = record["RefNoChequeNo"]
+            debit = record["Debit"]
+            credit = record["Credit"]
+            balance = record["Balance"]
+
+            # Add sender and receiver nodes to graph
+            G.add_node(sender_bank_id)
+            G.add_node(receiver_bank_id)
+
+            # Add transaction edge to graph
+            G.add_edge(sender_bank_id, receiver_bank_id, 
+                    txn_date=txn_date, value_date=value_date, 
+                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
+                    debit=debit, credit=credit, balance=balance)
+            
+    # pr = nx.pagerank(G)
+    components = list(nx.strongly_connected_components(G))
+    return {"components": components}
+
+
+
+@app.get("/bestPartition")
+async def partition():
+    print("PageRank")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, 
+        t.txnDate AS TxnDate, t.valueDate AS ValueDate, 
+        t.description AS Description, t.refNo AS RefNoChequeNo, 
+        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    """
+
+    # Create empty graph
+    G = nx.DiGraph()
+
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            txn_date = record["TxnDate"]
+            value_date = record["ValueDate"]
+            description = record["Description"]
+            ref_no_cheque_no = record["RefNoChequeNo"]
+            debit = record["Debit"]
+            credit = record["Credit"]
+            balance = record["Balance"]
+
+            # Add sender and receiver nodes to graph
+            G.add_node(sender_bank_id)
+            G.add_node(receiver_bank_id)
+
+            # Add transaction edge to graph
+            G.add_edge(sender_bank_id, receiver_bank_id, 
+                    txn_date=txn_date, value_date=value_date, 
+                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
+                    debit=debit, credit=credit, balance=balance)
+            
+    # pr = nx.pagerank(G)
+    from networkx.algorithms.community import greedy_modularity_communities
+
+    communities = list(greedy_modularity_communities(G))
+    for i, comm in enumerate(communities):
+        print(f"Community {i+1}: {comm}")
+
+    # Print the communities
+    # print(partition)
+
+    return {"Communities": communities}
+
+@app.get("/location")
+async def location():
+
+    print("Location")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID
+    """
+
+    result2  = []
+    sender_ids = []
+    final_result = []
+    threshold = 1
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            if sender_bank_id not in sender_ids:
+                sender_ids.append(sender_bank_id)
+            print("sender", sender_bank_id, "receiver", receiver_bank_id)
+
+        for id in sender_ids:
+            cypher_query2 ="MATCH (sender:Bank {id: $id})-[t:TRANSACTION]->(receiver:Bank)RETURN $id AS SenderBankID, t.location AS SenderLocation"
+            ans = list(session.run(cypher_query2, id=id))
+            print("result2", result2)
+            result2.append(ans)
+        
+        for i in range(0, len(result2)):
+            print("In")
+            if(len(result2[i]) > threshold):
+                obj = {"locations" : []}
+                obj["node"] = result2[i][0][0]
+                for loc in range(0, len(result2[i])):
+                    obj["locations"].append(result2[i][loc][1])
+                temp = obj
+                final_result.append(temp)
+
+    return {"locations_and_accounts": final_result}
 
 @app.get("/")
 async def root():
