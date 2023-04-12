@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import NativeSelect from '@mui/material/NativeSelect';
 import InputBase from '@mui/material/InputBase';
+import Switch from '@mui/material/Switch';
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   'label + &': {
@@ -50,12 +51,14 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
 
 const Visualize = () => {
 
-    const [suspiciousAccounts, setSuspiciousAccounts] = useState([]);
     const [allAccounts, setAllAccounts] = useState([]);
     const [graphData, setGraphData] = useState({nodes: [], links: []});
     const [fraudPattern, setFraudPattern] = useState("None");
-    const patterns = ["Cyclic Flow", "Money Laundering"];
+    const patterns = ["Cyclic Flow", "Money Laundering", "Hits"];
     const [suspiciousNodes, setSuspiciousNodes] = useState([]);
+    const [suspiciousLinks, setSuspiciousLinks] = useState([]);
+    const [isIncoming, setIsIncoming] = useState(false);
+    const [hoveredElm, setHoveredElm] = useState();
 
     const NODE_R = 8;
     const data = useMemo(() => {
@@ -69,6 +72,13 @@ const Visualize = () => {
                 node.color = '#5650ff'
             }
         });
+        gData.links.forEach((link) => {
+            if(suspiciousLinks.find((sLink) => sLink == link.refNo)){
+                link.color = '#ff5b5b';
+            }else{
+                link.color = '#656565';
+            }
+        })
         console.log(gData);
         // cross-link node objects
         // gData.links.forEach((link) => {
@@ -89,7 +99,7 @@ const Visualize = () => {
         //     b.links.push(link);
         // });
         return gData;
-    }, [graphData, suspiciousNodes]);
+    }, [graphData, suspiciousNodes, suspiciousLinks]);
 
     const [highlightNodes, setHighlightNodes] = useState(new Set());
     const [highlightLinks, setHighlightLinks] = useState(new Set());
@@ -149,7 +159,6 @@ const Visualize = () => {
                 console.log(res);
                 setGraphData(res.data);
                 setAllAccounts(res.data.nodes);
-                setSuspiciousAccounts(res.data.nodes);
             })
             .catch((err) => {
                 console.log(err.response.data.detail);
@@ -162,18 +171,19 @@ const Visualize = () => {
 
     const fetchCyclicFlow = async () => {
         try{
-            const res = await axios.get('http://localhost:5000/getCycles');
+            const res = await axios.get('http://localhost:8080/cycles');
             console.log(res.data);
-            const cyclesList = res.data;
+            const cyclesList = res.data.cycles;
             const tempSuspiciousList = [];
+            const tempSuspiciousTxn = [];
             cyclesList.forEach((cycle) => {
-                cycle.forEach((node) => {
-                    if(!tempSuspiciousList.find((n) => n.id == node.id)){
-                        tempSuspiciousList.push(node);
-                    }
-                })
+                cycle.nodes.forEach((node) => {
+                    tempSuspiciousList.push(data.nodes.find((n) => n.id == node));
+                });
+                tempSuspiciousTxn.push(...cycle.transactions);
             })
             setSuspiciousNodes(tempSuspiciousList);
+            setSuspiciousLinks(tempSuspiciousTxn);
         }catch(e){
             console.log(e);
         }
@@ -181,7 +191,26 @@ const Visualize = () => {
 
     const fetchPageRank = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/pageRank');
+            const res = await axios.get('http://localhost:8080/pageRank');
+            console.log(res.data);
+            const tempSuspiciousList = [];
+            const rankData = res.data;
+            rankData.nodes.forEach((node, index) => {
+                if(rankData.scores[index] > 0.3){
+                    tempSuspiciousList.push(data.nodes.find((n) => n.id == node));
+                }
+            });
+            console.log(tempSuspiciousList);
+            setSuspiciousNodes(tempSuspiciousList);
+            setSuspiciousLinks([]);
+        } catch(e){
+            console.log(e);
+        }
+    }
+
+    const fetchHits = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/hits');
             console.log(res.data);
         } catch(e){
             console.log(e);
@@ -192,10 +221,13 @@ const Visualize = () => {
         console.log(fraudPattern);
         if(fraudPattern == "None"){
             setSuspiciousNodes([]);
+            setSuspiciousLinks([]);
         }else if(fraudPattern == "Cyclic Flow"){
             fetchCyclicFlow();
         }else if(fraudPattern == "Money Laundering"){
             fetchPageRank();
+        }else if(fraudPattern == "Hits"){
+            fetchHits();
         }
     }, [fraudPattern]);
 
@@ -240,10 +272,7 @@ const Visualize = () => {
                                 <div className={styles.accountIcon}></div>
                                 <div className={styles.accountInfo}>
                                     <span className={styles.accountNumber}>
-                                        1555834834
-                                    </span>
-                                    <span className={styles.accountName}>
-                                        Ravi Maurya
+                                        {item.id}
                                     </span>
                                 </div>
                             </div>
@@ -256,10 +285,7 @@ const Visualize = () => {
                                 <div className={styles.allAccountIcon}></div>
                                 <div className={styles.accountInfo}>
                                     <span className={styles.accountNumber}>
-                                        1555834834
-                                    </span>
-                                    <span className={styles.accountName}>
-                                        Ravi Maurya
+                                        {item.id}
                                     </span>
                                 </div>
                             </div>
@@ -267,6 +293,16 @@ const Visualize = () => {
                     })}
                 </div>
                 <div className={styles.graphContainer}>
+                    {
+                        fraudPattern == "Hits" ? <div>
+                        <span>Outgoing</span>
+                            <Switch checked={isIncoming} onChange={(e)=>{
+                                setIsIncoming(e.target.checked);
+                            }}/>
+                        <span>Incoming</span>
+                    </div> : <></>
+                    }
+                    
                     <SizeMe>
                         {({ size }) => (
                             <>
@@ -276,10 +312,15 @@ const Visualize = () => {
                                     nodeColor={(node) =>
                                         node.color
                                     }
-                                    linkColor={(link) => "#656565"}
+                                    linkColor={(link) => link.color}
                                     linkDirectionalArrowLength={3.5}
                                     linkDirectionalArrowRelPos={1}
                                     linkCurvature="curvature"
+                                    onNodeHover={(node) => {
+                                        console.log(node);
+                                        setHoveredElm(node);
+                                    }}
+                                    nodeLabel="id"
                                 />
                             </>
                         )}
