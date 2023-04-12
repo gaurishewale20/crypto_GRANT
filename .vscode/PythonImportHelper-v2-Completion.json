@@ -1,0 +1,1134 @@
+[
+    {
+        "label": "fileinput",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "fileinput",
+        "description": "fileinput",
+        "detail": "fileinput",
+        "documentation": {}
+    },
+    {
+        "label": "operator",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "operator",
+        "description": "operator",
+        "detail": "operator",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "os.path",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.path",
+        "description": "os.path",
+        "detail": "os.path",
+        "documentation": {}
+    },
+    {
+        "label": "getopt",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "getopt",
+        "description": "getopt",
+        "detail": "getopt",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "struct",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "struct",
+        "description": "struct",
+        "detail": "struct",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "glob",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "glob",
+        "description": "glob",
+        "detail": "glob",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FileResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
+        "label": "uvicorn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uvicorn",
+        "description": "uvicorn",
+        "detail": "uvicorn",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "read_pdf",
+        "importPath": "tabula.io",
+        "description": "tabula.io",
+        "isExtraImport": true,
+        "detail": "tabula.io",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "seaborn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "seaborn",
+        "description": "seaborn",
+        "detail": "seaborn",
+        "documentation": {}
+    },
+    {
+        "label": "pyplot",
+        "importPath": "matplotlib",
+        "description": "matplotlib",
+        "isExtraImport": true,
+        "detail": "matplotlib",
+        "documentation": {}
+    },
+    {
+        "label": "GraphDatabase",
+        "importPath": "neo4j",
+        "description": "neo4j",
+        "isExtraImport": true,
+        "detail": "neo4j",
+        "documentation": {}
+    },
+    {
+        "label": "GraphDatabase",
+        "importPath": "neo4j",
+        "description": "neo4j",
+        "isExtraImport": true,
+        "detail": "neo4j",
+        "documentation": {}
+    },
+    {
+        "label": "networkx",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "networkx",
+        "description": "networkx",
+        "detail": "networkx",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "file_exists",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def file_exists(filename):\n    \"\"\"Return true if file exists and is accessible for reading.\n    Should be safer than just testing for existence due to links and\n    permissions magic on Unix filesystems.\n    @rtype: boolean\n    \"\"\"\n    try:\n        f = open(filename, 'r')\n        f.close()\n        return True",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "get_name",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def get_name(fname):\n    \"\"\"Create model name based of filename (\"path/fname.js\" -> \"fname\").\n    \"\"\"\n    return os.path.splitext(os.path.basename(fname))[0]\ndef bbox(vertices):\n    \"\"\"Compute bounding box of vertex array.\n    \"\"\"\n    if len(vertices)>0:\n        minx = maxx = vertices[0][0]\n        miny = maxy = vertices[0][1]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "bbox",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def bbox(vertices):\n    \"\"\"Compute bounding box of vertex array.\n    \"\"\"\n    if len(vertices)>0:\n        minx = maxx = vertices[0][0]\n        miny = maxy = vertices[0][1]\n        minz = maxz = vertices[0][2]\n        for v in vertices[1:]:\n            if v[0]<minx:\n                minx = v[0]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "translate",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def translate(vertices, t):\n    \"\"\"Translate array of vertices by vector t.\n    \"\"\"\n    for i in xrange(len(vertices)):\n        vertices[i][0] += t[0]\n        vertices[i][1] += t[1]\n        vertices[i][2] += t[2]\ndef center(vertices):\n    \"\"\"Center model (middle of bounding box).\n    \"\"\"",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "center",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def center(vertices):\n    \"\"\"Center model (middle of bounding box).\n    \"\"\"\n    bb = bbox(vertices)\n    cx = bb['x'][0] + (bb['x'][1] - bb['x'][0])/2.0\n    cy = bb['y'][0] + (bb['y'][1] - bb['y'][0])/2.0\n    cz = bb['z'][0] + (bb['z'][1] - bb['z'][0])/2.0\n    translate(vertices, [-cx,-cy,-cz])\ndef top(vertices):\n    \"\"\"Align top of the model with the floor (Y-axis) and center it around X and Z.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "top",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def top(vertices):\n    \"\"\"Align top of the model with the floor (Y-axis) and center it around X and Z.\n    \"\"\"\n    bb = bbox(vertices)\n    cx = bb['x'][0] + (bb['x'][1] - bb['x'][0])/2.0\n    cy = bb['y'][1]\n    cz = bb['z'][0] + (bb['z'][1] - bb['z'][0])/2.0\n    translate(vertices, [-cx,-cy,-cz])\ndef bottom(vertices):\n    \"\"\"Align bottom of the model with the floor (Y-axis) and center it around X and Z.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "bottom",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def bottom(vertices):\n    \"\"\"Align bottom of the model with the floor (Y-axis) and center it around X and Z.\n    \"\"\"\n    bb = bbox(vertices)\n    cx = bb['x'][0] + (bb['x'][1] - bb['x'][0])/2.0\n    cy = bb['y'][0]\n    cz = bb['z'][0] + (bb['z'][1] - bb['z'][0])/2.0\n    translate(vertices, [-cx,-cy,-cz])\ndef centerxz(vertices):\n    \"\"\"Center model around X and Z.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "centerxz",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def centerxz(vertices):\n    \"\"\"Center model around X and Z.\n    \"\"\"\n    bb = bbox(vertices)\n    cx = bb['x'][0] + (bb['x'][1] - bb['x'][0])/2.0\n    cy = 0\n    cz = bb['z'][0] + (bb['z'][1] - bb['z'][0])/2.0\n    translate(vertices, [-cx,-cy,-cz])\ndef normalize(v):\n    \"\"\"Normalize 3d vector\"\"\"",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "normalize",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def normalize(v):\n    \"\"\"Normalize 3d vector\"\"\"\n    l = math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2])\n    if l:\n        v[0] /= l\n        v[1] /= l\n        v[2] /= l\ndef veckey3(v):\n    return round(v[0], 6), round(v[1], 6), round(v[2], 6)\n# #####################################################",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "veckey3",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def veckey3(v):\n    return round(v[0], 6), round(v[1], 6), round(v[2], 6)\n# #####################################################\n# MTL parser\n# #####################################################\ndef texture_relative_path(fullpath):\n    texture_file = os.path.basename(fullpath.replace(\"\\\\\", \"/\"))\n    return texture_file\ndef parse_mtl(fname):\n    \"\"\"Parse MTL file.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "texture_relative_path",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def texture_relative_path(fullpath):\n    texture_file = os.path.basename(fullpath.replace(\"\\\\\", \"/\"))\n    return texture_file\ndef parse_mtl(fname):\n    \"\"\"Parse MTL file.\n    \"\"\"\n    materials = {}\n    for line in fileinput.input(fname):\n        chunks = line.split()\n        if len(chunks) > 0:",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "parse_mtl",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def parse_mtl(fname):\n    \"\"\"Parse MTL file.\n    \"\"\"\n    materials = {}\n    for line in fileinput.input(fname):\n        chunks = line.split()\n        if len(chunks) > 0:\n            # Material start\n            # newmtl identifier\n            if chunks[0] == \"newmtl\":",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "parse_vertex",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def parse_vertex(text):\n    \"\"\"Parse text chunk specifying single vertex.\n    Possible formats:\n        vertex index\n        vertex index / texture index\n        vertex index / texture index / normal index\n        vertex index / / normal index\n    \"\"\"\n    v = 0\n    t = 0",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "parse_obj",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def parse_obj(fname):\n    \"\"\"Parse OBJ file.\n    \"\"\"\n    vertices = []\n    normals = []\n    uvs = []\n    faces = []\n    materials = {}\n    material = \"\"\n    mcounter = 0",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "setBit",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def setBit(value, position, on):\n    if on:\n        mask = 1 << position\n        return (value | mask)\n    else:\n        mask = ~(1 << position)\n        return (value & mask)\ndef generate_face(f, fc):\n    isTriangle = ( len(f['vertex']) == 3 )\n    if isTriangle:",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_face",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_face(f, fc):\n    isTriangle = ( len(f['vertex']) == 3 )\n    if isTriangle:\n        nVertices = 3\n    else:\n        nVertices = 4\n    hasMaterial = True # for the moment OBJs without materials get default material\n    hasFaceUvs = False # not supported in OBJ\n    hasFaceVertexUvs = ( len(f['uv']) >= nVertices )\n    hasFaceNormals = False # don't export any face normals (as they are computed in engine)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "hexcolor",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def hexcolor(c):\n    return ( int(c[0] * 255) << 16  ) + ( int(c[1] * 255) << 8 ) + int(c[2] * 255)\ndef generate_vertex(v, option_vertices_truncate, scale):\n    if not option_vertices_truncate:\n        return TEMPLATE_VERTEX % (v[0], v[1], v[2])\n    else:\n        return TEMPLATE_VERTEX_TRUNCATE % (scale * v[0], scale * v[1], scale * v[2])\ndef generate_normal(n):\n    return TEMPLATE_N % (n[0], n[1], n[2])\ndef generate_uv(uv):",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_vertex",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_vertex(v, option_vertices_truncate, scale):\n    if not option_vertices_truncate:\n        return TEMPLATE_VERTEX % (v[0], v[1], v[2])\n    else:\n        return TEMPLATE_VERTEX_TRUNCATE % (scale * v[0], scale * v[1], scale * v[2])\ndef generate_normal(n):\n    return TEMPLATE_N % (n[0], n[1], n[2])\ndef generate_uv(uv):\n    return TEMPLATE_UV % (uv[0], uv[1])\ndef generate_color_rgb(c):",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_normal",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_normal(n):\n    return TEMPLATE_N % (n[0], n[1], n[2])\ndef generate_uv(uv):\n    return TEMPLATE_UV % (uv[0], uv[1])\ndef generate_color_rgb(c):\n    return TEMPLATE_COLOR % (c[0], c[1], c[2])\ndef generate_color_decimal(c):\n    return TEMPLATE_COLOR_DEC % hexcolor(c)\n# #####################################################\n# Morphs",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_uv",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_uv(uv):\n    return TEMPLATE_UV % (uv[0], uv[1])\ndef generate_color_rgb(c):\n    return TEMPLATE_COLOR % (c[0], c[1], c[2])\ndef generate_color_decimal(c):\n    return TEMPLATE_COLOR_DEC % hexcolor(c)\n# #####################################################\n# Morphs\n# #####################################################\ndef generate_morph_vertex(name, vertices):",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_color_rgb",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_color_rgb(c):\n    return TEMPLATE_COLOR % (c[0], c[1], c[2])\ndef generate_color_decimal(c):\n    return TEMPLATE_COLOR_DEC % hexcolor(c)\n# #####################################################\n# Morphs\n# #####################################################\ndef generate_morph_vertex(name, vertices):\n    vertex_string = \",\".join(generate_vertex(v, TRUNCATE, SCALE) for v in vertices)\n    return TEMPLATE_MORPH_VERTICES % (name, vertex_string)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_color_decimal",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_color_decimal(c):\n    return TEMPLATE_COLOR_DEC % hexcolor(c)\n# #####################################################\n# Morphs\n# #####################################################\ndef generate_morph_vertex(name, vertices):\n    vertex_string = \",\".join(generate_vertex(v, TRUNCATE, SCALE) for v in vertices)\n    return TEMPLATE_MORPH_VERTICES % (name, vertex_string)\ndef generate_morph_color(name, colors):\n    color_string = \",\".join(generate_color_rgb(c) for c in colors)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_morph_vertex",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_morph_vertex(name, vertices):\n    vertex_string = \",\".join(generate_vertex(v, TRUNCATE, SCALE) for v in vertices)\n    return TEMPLATE_MORPH_VERTICES % (name, vertex_string)\ndef generate_morph_color(name, colors):\n    color_string = \",\".join(generate_color_rgb(c) for c in colors)\n    return TEMPLATE_MORPH_COLORS % (name, color_string)\ndef extract_material_colors(materials, mtlfilename, basename):\n    \"\"\"Extract diffuse colors from MTL materials\n    \"\"\"\n    if not materials:",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_morph_color",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_morph_color(name, colors):\n    color_string = \",\".join(generate_color_rgb(c) for c in colors)\n    return TEMPLATE_MORPH_COLORS % (name, color_string)\ndef extract_material_colors(materials, mtlfilename, basename):\n    \"\"\"Extract diffuse colors from MTL materials\n    \"\"\"\n    if not materials:\n        materials = { 'default': 0 }\n    mtl = create_materials(materials, mtlfilename, basename)\n    mtlColorArraySrt = []",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "extract_material_colors",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def extract_material_colors(materials, mtlfilename, basename):\n    \"\"\"Extract diffuse colors from MTL materials\n    \"\"\"\n    if not materials:\n        materials = { 'default': 0 }\n    mtl = create_materials(materials, mtlfilename, basename)\n    mtlColorArraySrt = []\n    for m in mtl:\n        if m in materials:\n            index = materials[m]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "extract_face_colors",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def extract_face_colors(faces, material_colors):\n    \"\"\"Extract colors from materials and assign them to faces\n    \"\"\"\n    faceColors = []\n    for face in faces:\n        material_index = face['material']\n        faceColors.append(material_colors[material_index])\n    return faceColors\ndef generate_morph_targets(morphfiles, n_vertices, infile):\n    skipOriginalMorph = False",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_morph_targets",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_morph_targets(morphfiles, n_vertices, infile):\n    skipOriginalMorph = False\n    norminfile = os.path.normpath(infile)\n    morphVertexData = []\n    for mfilepattern in morphfiles.split():\n        matches = glob.glob(mfilepattern)\n        matches.sort()\n        indices = range(0, len(matches), FRAMESTEP)\n        for i in indices:\n            path = matches[i]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_morph_colors",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_morph_colors(colorfiles, n_vertices, n_faces):\n    morphColorData = []\n    colorFaces = []\n    materialColors = []\n    for mfilepattern in colorfiles.split():\n        matches = glob.glob(mfilepattern)\n        matches.sort()\n        for path in matches:\n            normpath = os.path.normpath(path)\n            name = os.path.basename(normpath)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_color",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_color(i):\n    \"\"\"Generate hex color corresponding to integer.\n    Colors should have well defined ordering.\n    First N colors are hardcoded, then colors are random\n    (must seed random number  generator with deterministic value\n    before getting colors).\n    \"\"\"\n    if i < len(COLORS):\n        #return \"0x%06x\" % COLORS[i]\n        return COLORS[i]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "value2string",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def value2string(v):\n    if type(v)==str and v[0:2] != \"0x\":\n        return '\"%s\"' % v\n    elif type(v) == bool:\n        return str(v).lower()\n    return str(v)\ndef generate_materials(mtl, materials):\n    \"\"\"Generate JS array of materials objects\n    JS material objects are basically prettified one-to-one\n    mappings of MTL properties in JSON format.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_materials",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_materials(mtl, materials):\n    \"\"\"Generate JS array of materials objects\n    JS material objects are basically prettified one-to-one\n    mappings of MTL properties in JSON format.\n    \"\"\"\n    mtl_array = []\n    for m in mtl:\n        if m in materials:\n            index = materials[m]\n            # add debug information",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_mtl",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_mtl(materials):\n    \"\"\"Generate dummy materials (if there is no MTL file).\n    \"\"\"\n    mtl = {}\n    for m in materials:\n        index = materials[m]\n        mtl[m] = {\n            'DbgName': m,\n            'DbgIndex': index,\n            'DbgColor': generate_color(index)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "generate_materials_string",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def generate_materials_string(materials, mtlfilename, basename):\n    \"\"\"Generate final materials string.\n    \"\"\"\n    if not materials:\n        materials = { 'default': 0 }\n    mtl = create_materials(materials, mtlfilename, basename)\n    return generate_materials(mtl, materials)\ndef create_materials(materials, mtlfilename, basename):\n    \"\"\"Parse MTL file and create mapping between its materials and OBJ materials.\n       Eventual edge cases are handled here (missing materials, missing MTL file).",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "create_materials",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def create_materials(materials, mtlfilename, basename):\n    \"\"\"Parse MTL file and create mapping between its materials and OBJ materials.\n       Eventual edge cases are handled here (missing materials, missing MTL file).\n    \"\"\"\n    random.seed(42) # to get well defined color order for debug colors\n    # default materials with debug colors for when\n    # there is no specified MTL / MTL loading failed,\n    # or if there were no materials / null materials\n    mtl = generate_mtl(materials)\n    if mtlfilename:",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_triangle_flat",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_triangle_flat(f):\n    return len(f['vertex'])==3 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']\ndef is_triangle_flat_uv(f):\n    return len(f['vertex'])==3 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==3\ndef is_triangle_smooth(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_triangle_smooth_uv(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==3\ndef is_quad_flat(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_triangle_flat_uv",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_triangle_flat_uv(f):\n    return len(f['vertex'])==3 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==3\ndef is_triangle_smooth(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_triangle_smooth_uv(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==3\ndef is_quad_flat(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']\ndef is_quad_flat_uv(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==4",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_triangle_smooth",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_triangle_smooth(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_triangle_smooth_uv(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==3\ndef is_quad_flat(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']\ndef is_quad_flat_uv(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==4\ndef is_quad_smooth(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_triangle_smooth_uv",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_triangle_smooth_uv(f):\n    return len(f['vertex'])==3 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==3\ndef is_quad_flat(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']\ndef is_quad_flat_uv(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==4\ndef is_quad_smooth(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_quad_smooth_uv(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==4",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_quad_flat",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_quad_flat(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and not f['uv']\ndef is_quad_flat_uv(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==4\ndef is_quad_smooth(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_quad_smooth_uv(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==4\ndef sort_faces(faces):\n    data = {",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_quad_flat_uv",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_quad_flat_uv(f):\n    return len(f['vertex'])==4 and not (f[\"normal\"] and SHADING == \"smooth\") and len(f['uv'])==4\ndef is_quad_smooth(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_quad_smooth_uv(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==4\ndef sort_faces(faces):\n    data = {\n    'triangles_flat': [],\n    'triangles_flat_uv': [],",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_quad_smooth",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_quad_smooth(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and not f['uv']\ndef is_quad_smooth_uv(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==4\ndef sort_faces(faces):\n    data = {\n    'triangles_flat': [],\n    'triangles_flat_uv': [],\n    'triangles_smooth': [],\n    'triangles_smooth_uv': [],",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "is_quad_smooth_uv",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def is_quad_smooth_uv(f):\n    return len(f['vertex'])==4 and f[\"normal\"] and SHADING == \"smooth\" and len(f['uv'])==4\ndef sort_faces(faces):\n    data = {\n    'triangles_flat': [],\n    'triangles_flat_uv': [],\n    'triangles_smooth': [],\n    'triangles_smooth_uv': [],\n    'quads_flat': [],\n    'quads_flat_uv': [],",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "sort_faces",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def sort_faces(faces):\n    data = {\n    'triangles_flat': [],\n    'triangles_flat_uv': [],\n    'triangles_smooth': [],\n    'triangles_smooth_uv': [],\n    'quads_flat': [],\n    'quads_flat_uv': [],\n    'quads_smooth': [],\n    'quads_smooth_uv': []",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "convert_ascii",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def convert_ascii(infile, morphfiles, colorfiles, outfile):\n    \"\"\"Convert infile.obj to outfile.js\n    Here is where everything happens. If you need to automate conversions,\n    just import this file as Python module and call this method.\n    \"\"\"\n    if not file_exists(infile):\n        print \"Couldn't find [%s]\" % infile\n        return\n    # parse OBJ / MTL files\n    faces, vertices, uvs, normals, materials, mtllib = parse_obj(infile)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_materials_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_materials_to_buffer(faces, buffer):\n    for f in faces:\n        data = struct.pack('<H',\n                            f['material'])\n        buffer.append(data)\ndef dump_vertices3_to_buffer(faces, buffer):\n    for f in faces:\n        vi = f['vertex']\n        data = struct.pack('<III',\n                            vi[0]-1, vi[1]-1, vi[2]-1)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_vertices3_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_vertices3_to_buffer(faces, buffer):\n    for f in faces:\n        vi = f['vertex']\n        data = struct.pack('<III',\n                            vi[0]-1, vi[1]-1, vi[2]-1)\n        buffer.append(data)\ndef dump_vertices4_to_buffer(faces, buffer):\n    for f in faces:\n        vi = f['vertex']\n        data = struct.pack('<IIII',",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_vertices4_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_vertices4_to_buffer(faces, buffer):\n    for f in faces:\n        vi = f['vertex']\n        data = struct.pack('<IIII',\n                            vi[0]-1, vi[1]-1, vi[2]-1, vi[3]-1)\n        buffer.append(data)\ndef dump_normals3_to_buffer(faces, buffer):\n    for f in faces:\n        ni = f['normal']\n        data = struct.pack('<III',",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_normals3_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_normals3_to_buffer(faces, buffer):\n    for f in faces:\n        ni = f['normal']\n        data = struct.pack('<III',\n                            ni[0]-1, ni[1]-1, ni[2]-1)\n        buffer.append(data)\ndef dump_normals4_to_buffer(faces, buffer):\n    for f in faces:\n        ni = f['normal']\n        data = struct.pack('<IIII',",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_normals4_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_normals4_to_buffer(faces, buffer):\n    for f in faces:\n        ni = f['normal']\n        data = struct.pack('<IIII',\n                            ni[0]-1, ni[1]-1, ni[2]-1, ni[3]-1)\n        buffer.append(data)\ndef dump_uvs3_to_buffer(faces, buffer):\n    for f in faces:\n        ui = f['uv']\n        data = struct.pack('<III',",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_uvs3_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_uvs3_to_buffer(faces, buffer):\n    for f in faces:\n        ui = f['uv']\n        data = struct.pack('<III',\n                            ui[0]-1, ui[1]-1, ui[2]-1)\n        buffer.append(data)\ndef dump_uvs4_to_buffer(faces, buffer):\n    for f in faces:\n        ui = f['uv']\n        data = struct.pack('<IIII',",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "dump_uvs4_to_buffer",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def dump_uvs4_to_buffer(faces, buffer):\n    for f in faces:\n        ui = f['uv']\n        data = struct.pack('<IIII',\n                            ui[0]-1, ui[1]-1, ui[2]-1, ui[3]-1)\n        buffer.append(data)\ndef add_padding(buffer, n):\n    if n % 4:\n        for i in range(4 - n % 4):\n            data = struct.pack('<B', 0)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "add_padding",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def add_padding(buffer, n):\n    if n % 4:\n        for i in range(4 - n % 4):\n            data = struct.pack('<B', 0)\n            buffer.append(data)\ndef convert_binary(infile, outfile):\n    \"\"\"Convert infile.obj to outfile.js + outfile.bin\n    \"\"\"\n    if not file_exists(infile):\n        print \"Couldn't find [%s]\" % infile",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "convert_binary",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def convert_binary(infile, outfile):\n    \"\"\"Convert infile.obj to outfile.js + outfile.bin\n    \"\"\"\n    if not file_exists(infile):\n        print \"Couldn't find [%s]\" % infile\n        return\n    binfile = get_name(outfile) + \".bin\"\n    faces, vertices, uvs, normals, materials, mtllib = parse_obj(infile)\n    if ALIGN == \"center\":\n        center(vertices)",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "usage",
+        "kind": 2,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "def usage():\n    print \"Usage: %s -i filename.obj -o filename.js [-m morphfiles*.obj] [-c morphcolors*.obj] [-a center|top|bottom] [-s flat|smooth] [-t binary|ascii] [-d invert|normal]\" % os.path.basename(sys.argv[0])\n# #####################################################\n# Main\n# #####################################################\nif __name__ == \"__main__\":\n    # get parameters from the command line\n    try:\n        opts, args = getopt.getopt(sys.argv[1:], \"hbi:m:c:b:o:a:s:t:d:x:f:\", [\"help\", \"bakecolors\", \"input=\", \"morphs=\", \"colors=\", \"output=\", \"align=\", \"shading=\", \"type=\", \"dissolve=\", \"truncatescale=\", \"framestep=\"])\n    except getopt.GetoptError:",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "ALIGN",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "ALIGN = \"none\"        \t# center centerxz bottom top none\nSHADING = \"smooth\"      # smooth flat\nTYPE = \"ascii\"          # ascii binary\nTRANSPARENCY = \"normal\" # normal invert\nTRUNCATE = False\nSCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "SHADING",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "SHADING = \"smooth\"      # smooth flat\nTYPE = \"ascii\"          # ascii binary\nTRANSPARENCY = \"normal\" # normal invert\nTRUNCATE = False\nSCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TYPE",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TYPE = \"ascii\"          # ascii binary\nTRANSPARENCY = \"normal\" # normal invert\nTRUNCATE = False\nSCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TRANSPARENCY",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TRANSPARENCY = \"normal\" # normal invert\nTRUNCATE = False\nSCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TRUNCATE",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TRUNCATE = False\nSCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates\n# #####################################################",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "SCALE",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "SCALE = 1.0\nFRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates\n# #####################################################\nTEMPLATE_FILE_ASCII = u\"\"\"\\",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "FRAMESTEP",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "FRAMESTEP = 1\nBAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates\n# #####################################################\nTEMPLATE_FILE_ASCII = u\"\"\"\\\n{",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "BAKE_COLORS",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "BAKE_COLORS = False\n# default colors for debugging (each material gets one distinct color):\n# white, red, green, blue, yellow, cyan, magenta\nCOLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates\n# #####################################################\nTEMPLATE_FILE_ASCII = u\"\"\"\\\n{\n    \"metadata\" :",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "COLORS",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "COLORS = [0xeeeeee, 0xee0000, 0x00ee00, 0x0000ee, 0xeeee00, 0x00eeee, 0xee00ee]\n# #####################################################\n# Templates\n# #####################################################\nTEMPLATE_FILE_ASCII = u\"\"\"\\\n{\n    \"metadata\" :\n    {\n        \"formatVersion\" : 3.1,\n        \"sourceFile\"    : \"%(fname)s\",",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_FILE_ASCII",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_FILE_ASCII = u\"\"\"\\\n{\n    \"metadata\" :\n    {\n        \"formatVersion\" : 3.1,\n        \"sourceFile\"    : \"%(fname)s\",\n        \"generatedBy\"   : \"OBJConverter\",\n        \"vertices\"      : %(nvertex)d,\n        \"faces\"         : %(nface)d,\n        \"normals\"       : %(nnormal)d,",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_FILE_BIN",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_FILE_BIN = u\"\"\"\\\n{\n    \"metadata\" :\n    {\n        \"formatVersion\" : 3.1,\n        \"sourceFile\"    : \"%(fname)s\",\n        \"generatedBy\"   : \"OBJConverter\",\n        \"vertices\"      : %(nvertex)d,\n        \"faces\"         : %(nface)d,\n        \"normals\"       : %(nnormal)d,",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_VERTEX",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_VERTEX = \"%f,%f,%f\"\nTEMPLATE_VERTEX_TRUNCATE = \"%d,%d,%d\"\nTEMPLATE_N = \"%.5g,%.5g,%.5g\"\nTEMPLATE_UV = \"%.5g,%.5g\"\nTEMPLATE_COLOR = \"%.3g,%.3g,%.3g\"\nTEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_VERTEX_TRUNCATE",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_VERTEX_TRUNCATE = \"%d,%d,%d\"\nTEMPLATE_N = \"%.5g,%.5g,%.5g\"\nTEMPLATE_UV = \"%.5g,%.5g\"\nTEMPLATE_COLOR = \"%.3g,%.3g,%.3g\"\nTEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_N",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_N = \"%.5g,%.5g,%.5g\"\nTEMPLATE_UV = \"%.5g,%.5g\"\nTEMPLATE_COLOR = \"%.3g,%.3g,%.3g\"\nTEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################\ndef file_exists(filename):",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_UV",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_UV = \"%.5g,%.5g\"\nTEMPLATE_COLOR = \"%.3g,%.3g,%.3g\"\nTEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################\ndef file_exists(filename):\n    \"\"\"Return true if file exists and is accessible for reading.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_COLOR",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_COLOR = \"%.3g,%.3g,%.3g\"\nTEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################\ndef file_exists(filename):\n    \"\"\"Return true if file exists and is accessible for reading.\n    Should be safer than just testing for existence due to links and",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_COLOR_DEC",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_COLOR_DEC = \"%d\"\nTEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################\ndef file_exists(filename):\n    \"\"\"Return true if file exists and is accessible for reading.\n    Should be safer than just testing for existence due to links and\n    permissions magic on Unix filesystems.",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATE_MORPH_VERTICES",
+        "kind": 5,
+        "importPath": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "description": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "peekOfCode": "TEMPLATE_MORPH_VERTICES = '\\t{ \"name\": \"%s\", \"vertices\": [%s] }'\nTEMPLATE_MORPH_COLORS   = '\\t{ \"name\": \"%s\", \"colors\": [%s] }'\n# #####################################################\n# Utils\n# #####################################################\ndef file_exists(filename):\n    \"\"\"Return true if file exists and is accessible for reading.\n    Should be safer than just testing for existence due to links and\n    permissions magic on Unix filesystems.\n    @rtype: boolean",
+        "detail": "node_modules.three-pathfinding.demo.meshes.convert_obj_three",
+        "documentation": {}
+    },
+    {
+        "label": "convertToCommonFormat",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    print(transactions)\n    # Select columns that we need",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "preprocessFile",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    print(transactions)\n    # Select columns that we need\n    transactions = transactions[[\"Txn Date\", \"Sender No\", \"Recipient No\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Bank\"]]\n    print(transactions)",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "convertToCSV",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def convertToCSV(uploadedfile):\n    # print(file.filename)\n    file_ext = f'.{uploadedfile.filename.split(\".\")[-1]}'\n    print(\"------------------------------------------\")\n    print(file_ext)\n    print(\"------------------------------------------\")\n    if file_ext not in UPLOAD_EXTENSIONS:\n        return \"Invalid file type\"\n    file_location = os.path.join(BASE_DIR, uploadedfile.filename)\n    # saving the file temporarily",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "findVolumes",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def findVolumes(df):\n    incomingCount = {}\n    outgoingCount = {}\n    tranCount = {}\n    mean = {}\n    def addToDict(d, key, val):\n        if key in d:\n            d[key] += val\n        else :\n            d[key] = val",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "accountTransactionsHelper",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def accountTransactionsHelper(transactions, accountNo):\n  df = transactions.copy()\n  df= df.loc[(df[\"Sender No\"]==accountNo) | (df[\"Recipient No\"]==accountNo)]\n  m = df[\"Sender No\"] == accountNo\n  df.loc[m,\"Amount\"] *=-1\n  return df\ndef balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)\n  print(df)",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "balance_history",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)\n  print(df)\n  print(\"---\"*40)\n  balanceHistory = sns.lineplot(\n      x=\"Value Date\",\n      y=\"Balance\",\n      data=df\n  )",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "spendAnalyser",
+        "kind": 2,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "def spendAnalyser(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  history = sns.barplot(data = df,\n              x = \"Value Date\",\n              y = \"Amount\",dodge=False)\n  for bar in history.patches:\n      if bar.get_height() < 0:\n          bar.set_color('red')\n      else:\n          bar.set_color('green')",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "uri",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "uri = \"bolt://localhost:7687\"\nuser = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "user",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "user = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "password",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "password = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "driver",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "driver = GraphDatabase.driver(uri, auth=(user, password))\nBASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\napp = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\nUPLOAD_EXTENSIONS = ['.pdf', '.xlsx','.csv']",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "app = FastAPI()\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\"*\"],  # replace this with the list of allowed origins\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)\nUPLOAD_EXTENSIONS = ['.pdf', '.xlsx','.csv']\ncolumnNames = {",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "UPLOAD_EXTENSIONS",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "UPLOAD_EXTENSIONS = ['.pdf', '.xlsx','.csv']\ncolumnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "columnNames",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "columnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "bankColumnNames",
+        "kind": 5,
+        "importPath": "preprocessing.app",
+        "description": "preprocessing.app",
+        "peekOfCode": "bankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)",
+        "detail": "preprocessing.app",
+        "documentation": {}
+    },
+    {
+        "label": "headers",
+        "kind": 5,
+        "importPath": "server.script",
+        "description": "server.script",
+        "peekOfCode": "headers = [\"Date\", \"Description\", \"Amount\", \"Type\", \"Location\"]\nnew_headers = [\"Transaction Data\" if re.match(\"^[a-zA-Z\\s/]*\\b(\\w+)\\b.*\", header) else header for header in headers]\nprint(new_headers)",
+        "detail": "server.script",
+        "documentation": {}
+    },
+    {
+        "label": "new_headers",
+        "kind": 5,
+        "importPath": "server.script",
+        "description": "server.script",
+        "peekOfCode": "new_headers = [\"Transaction Data\" if re.match(\"^[a-zA-Z\\s/]*\\b(\\w+)\\b.*\", header) else header for header in headers]\nprint(new_headers)",
+        "detail": "server.script",
+        "documentation": {}
+    },
+    {
+        "label": "pagerank",
+        "kind": 2,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "def pagerank(graph):\n    print(\"=========PAGERANK===========\")\n    # Apply PageRank to the graph\n    pr = nx.pagerank(graph)\n    # Print the PageRank scores\n    for node, score in pr.items():\n        print(f\"Node {node}: PageRank score = {score}\")\ndef find_cycles(graph):\n    print(\"========CYCLES=======\")\n    accounts = list(nx.simple_cycles(graph))",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "find_cycles",
+        "kind": 2,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    accounts = list(nx.simple_cycles(graph))\ndef centralities(G):\n    print(\"==========Centrality Measures==========\")\n    # degree centrality\n    deg_cen = nx.degree_centrality(G)\n    print(\"Degree centrality:\", deg_cen)\n    # closeness centrality\n    clo_cen = nx.closeness_centrality(G)",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "centralities",
+        "kind": 2,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "def centralities(G):\n    print(\"==========Centrality Measures==========\")\n    # degree centrality\n    deg_cen = nx.degree_centrality(G)\n    print(\"Degree centrality:\", deg_cen)\n    # closeness centrality\n    clo_cen = nx.closeness_centrality(G)\n    print(\"Closeness centrality:\", clo_cen)\n    # betweenness centrality\n    bet_cen = nx.betweenness_centrality(G)",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "apply_hits",
+        "kind": 2,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "def apply_hits(graph):\n    print(\"=============HITS==============\")\n    h, a = nx.hits(graph)\n    # print authorities and hubs\n    print(\"Authorities: \", a)\n    print(\"Hubs: \", h)\npagerank(G)\nfind_cycles(G)\ncentralities(G)\napply_hits(G)",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "uri",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "uri = \"bolt://localhost:7687\"\nuser = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\n# Define Cypher query\ncypher_query = \"\"\"\nMATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\nRETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n       t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n       t.description AS Description, t.refNo AS RefNoChequeNo, ",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "user",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "user = \"neo4j\"\npassword = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\n# Define Cypher query\ncypher_query = \"\"\"\nMATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\nRETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n       t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n       t.description AS Description, t.refNo AS RefNoChequeNo, \n       t.debit AS Debit, t.credit AS Credit, t.balance AS Balance",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "password",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "password = \"Pablo123\"\ndriver = GraphDatabase.driver(uri, auth=(user, password))\n# Define Cypher query\ncypher_query = \"\"\"\nMATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\nRETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n       t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n       t.description AS Description, t.refNo AS RefNoChequeNo, \n       t.debit AS Debit, t.credit AS Credit, t.balance AS Balance\n\"\"\"",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "driver",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "driver = GraphDatabase.driver(uri, auth=(user, password))\n# Define Cypher query\ncypher_query = \"\"\"\nMATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\nRETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n       t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n       t.description AS Description, t.refNo AS RefNoChequeNo, \n       t.debit AS Debit, t.credit AS Credit, t.balance AS Balance\n\"\"\"\n# Create empty graph",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "cypher_query",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "cypher_query = \"\"\"\nMATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\nRETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n       t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n       t.description AS Description, t.refNo AS RefNoChequeNo, \n       t.debit AS Debit, t.credit AS Credit, t.balance AS Balance\n\"\"\"\n# Create empty graph\nG = nx.DiGraph()\n# Open Neo4j session",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "G",
+        "kind": 5,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "G = nx.DiGraph()\n# Open Neo4j session\nwith driver.session() as session:\n    # Run query and iterate over result\n    result = session.run(cypher_query)\n    for record in result:\n        # Extract data from record\n        sender_bank_id = record[\"SenderBankID\"]\n        receiver_bank_id = record[\"ReceiverBankID\"]\n        txn_date = record[\"TxnDate\"]",
+        "detail": "net-graph",
+        "documentation": {}
+    }
+]

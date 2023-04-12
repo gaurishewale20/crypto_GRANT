@@ -70,7 +70,7 @@ exports.uploadCSVController = async (req, res) => {
 
     // Define the function that creates the nodes and relationships
     async function createNodesAndEdges(transactions) {
-      console.log("transactions",transactions);
+      console.log("transactions", transactions);
       const session = driver.session();
       // console.log(session);
       try {
@@ -79,11 +79,11 @@ exports.uploadCSVController = async (req, res) => {
           const senderBankId = transaction.senderBankId;
           const receiverBankId = transaction.receiverBankId;
           const refNo = transaction.refNo;
-          
+
           let result2 = await session.run(
             "MATCH (sender:Bank )-[t:TRANSACTION {refNo: $refNo}]->(receiver:Bank) RETURN  t.refNo AS RefNoChequeNo",
             {
-              refNo
+              refNo,
             }
           );
           console.log("result2", result2.records.length);
@@ -101,7 +101,7 @@ exports.uploadCSVController = async (req, res) => {
           //     break;
           //   }
           // }
-          if (result2.records.length==0) {
+          if (result2.records.length == 0) {
             await session.run("MERGE (sender:Bank {id: $senderBankId})", {
               senderBankId,
             });
@@ -119,6 +119,13 @@ exports.uploadCSVController = async (req, res) => {
             console.log(
               `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}, amount=${transaction.amount}`
             );
+            fs.unlink("./input.csv", (err) => {
+              if (err) {
+                throw err;
+              }
+
+              console.log("Deleted File successfully.");
+            });
           }
         }
       } finally {
@@ -210,7 +217,7 @@ exports.pageRank = async (req, res) => {
   const session = driver.session();
   const results = [];
 
-    const query = `
+  const query = `
     CALL gds.pageRank.stream('transactions', {
       dampingFactor: 0.85,
       maxIterations: 20
@@ -226,7 +233,7 @@ exports.pageRank = async (req, res) => {
     .then((result) => {
       // console.log(result.records);
       result.records.forEach((record) => {
-        results.push(record.get('node'), record.get('score'));
+        results.push(record.get("node"), record.get("score"));
       });
       console.log(results);
       res.send(results);
@@ -239,12 +246,9 @@ exports.pageRank = async (req, res) => {
       driver.close();
       // res.send({nodes, links});
     });
-  
 };
 
-
-
-exports.getCycles = async(req, res) => {
+exports.getCycles = async (req, res) => {
   console.log("===== Get Cycles =======");
 
   const driver = neo4j.driver(
@@ -265,9 +269,9 @@ exports.getCycles = async(req, res) => {
     .then((result) => {
       // console.log(result);
       result.records.forEach((record) => {
-        const nodes = record.get('NODES(R)');
-        console.log(nodes.map(node => node.properties));
-        results.push(nodes.map(node => node.properties));
+        const nodes = record.get("NODES(R)");
+        console.log(nodes.map((node) => node.properties));
+        results.push(nodes.map((node) => node.properties));
       });
       res.send(results);
     })
@@ -279,8 +283,7 @@ exports.getCycles = async(req, res) => {
       driver.close();
       // res.send(result.record);
     });
-}
-
+};
 
 // CALL gds.eigenvector.stream('transactions', {
 //   maxIterations: 20
@@ -289,7 +292,6 @@ exports.getCycles = async(req, res) => {
 // RETURN gds.util.asNode(nodeId).id AS node, score
 // ORDER BY score DESC
 // LIMIT 10
-
 
 exports.eigenVectorCentrality = async (req, res) => {
   console.log("===== EXTRACT DATA =======");
@@ -303,7 +305,7 @@ exports.eigenVectorCentrality = async (req, res) => {
   const session = driver.session();
   const results = [];
 
-    const query = `
+  const query = `
     CALL gds.eigenvector.stream('transactions', {
       maxIterations: 20
     })
@@ -318,7 +320,7 @@ exports.eigenVectorCentrality = async (req, res) => {
     .then((result) => {
       // console.log(result);
       result.records.forEach((record) => {
-        results.push(record.get('node'), record.get('score'));
+        results.push(record.get("node"), record.get("score"));
       });
       console.log(results);
       res.send(results);
@@ -331,5 +333,4 @@ exports.eigenVectorCentrality = async (req, res) => {
       driver.close();
       // res.send({nodes, links});
     });
-  
 };
