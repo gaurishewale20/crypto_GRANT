@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
@@ -10,6 +10,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from neo4j import GraphDatabase
 import networkx as nx
+import base64
 
 from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
@@ -158,12 +159,13 @@ def accountTransactionsHelper(transactions, accountNo):
   df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
   m = df["Sender No"] == accountNo
   df.loc[m,"Amount"] *=-1
+  print(df.head())
   return df
 
 def balance_history(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
   print("---"*40)
-  print(df)
+#   print(df)
   print("---"*40)
   balanceHistory = sns.lineplot(
       x="Value Date",
@@ -175,6 +177,7 @@ def balance_history(transactions, accountNo):
   plt.ylabel("Balance")
   plt.savefig('line_plot')
   plt.close()
+  return os.getcwd()
 
 def spendAnalyser(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
@@ -191,31 +194,38 @@ def spendAnalyser(transactions, accountNo):
   plt.ylabel("Money")
   plt.savefig('bar_plot')
   plt.close()
+  return os.getcwd()
 
 @app.post("/get_balance_history/{accountNo}")
 async def get_balance_history(accountNo : str, file: UploadFile):
-    file_location = os.path.join(BASE_DIR, file.filename)
+    # file_location = os.path.join(BASE_DIR, file.filename)
 
-    # saving the file temporarily
-    with open(file_location, "wb+") as file_object:
-        file_object.write(file.file.read())
-    
-    csvFile = pd.read_csv(file_location)
-    
-    balance_history(csvFile, int(accountNo))
-    return FileResponse(os.path.join(BASE_DIR, "line_plot.png"), media_type='image/png')
+    # # saving the file temporarily
+    # with open(file_location, "wb+") as file_object:
+    #     file_object.write(file.file.read())
+    csvFile = convertToCSV(file)
+    outputpath = balance_history(csvFile, int(accountNo))
+    with open(os.path.join(outputpath, "line_plot.png"), 'rb') as f:
+        image_data = f.read()
+    encoded_image = base64.b64encode(image_data).decode()
+    return PlainTextResponse(encoded_image)
+    # return FileResponse(), media_type='image/png')
 
 @app.post("/get_spend_analyser/{accountNo}")
 async def get_spend_analyser(accountNo : str, file: UploadFile):
-    file_location = os.path.join(BASE_DIR, file.filename)
+    # file_location = os.path.join(BASE_DIR, file.filename)
 
-    # saving the file temporarily
-    with open(file_location, "wb+") as file_object:
-        file_object.write(file.file.read())
-    
-    csvFile = pd.read_csv(file_location)
-    spendAnalyser(csvFile, int(accountNo))
-    return FileResponse(os.path.join(BASE_DIR, "bar_plot.png"), media_type='image/png')
+    # # saving the file temporarily
+    # with open(file_location, "wb+") as file_object:
+    #     file_object.write(file.file.read())
+
+    csvFile = convertToCSV(file)
+    outputpath = spendAnalyser(csvFile, int(accountNo))
+    with open(os.path.join(outputpath, "bar_plot.png"), 'rb') as f:
+        image_data = f.read()
+    encoded_image = base64.b64encode(image_data).decode()
+    return PlainTextResponse(encoded_image)
+    # return FileResponse(os.path.join(outputpath, "bar_plot.png"), media_type='image/png')
 
 @app.post("/findVolumes")
 async def findVolumesAPI(file: UploadFile):
