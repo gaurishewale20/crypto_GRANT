@@ -205,6 +205,14 @@
         "documentation": {}
     },
     {
+        "label": "GraphDatabase",
+        "importPath": "neo4j",
+        "description": "neo4j",
+        "isExtraImport": true,
+        "detail": "neo4j",
+        "documentation": {}
+    },
+    {
         "label": "networkx",
         "kind": 6,
         "isExtraImport": true,
@@ -1050,11 +1058,20 @@
         "documentation": {}
     },
     {
+        "label": "cycles",
+        "kind": 2,
+        "importPath": "cycles-modified",
+        "description": "cycles-modified",
+        "peekOfCode": "def cycles():\n    print(\"Cycles\")\n    # Define Cypher query\n    cypher_query = \"\"\"\n    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)\n    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, \n        t.txnDate AS TxnDate, t.valueDate AS ValueDate, \n        t.description AS Description, t.refNo AS RefNoChequeNo, \n        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance\n    \"\"\"",
+        "detail": "cycles-modified",
+        "documentation": {}
+    },
+    {
         "label": "pagerank",
         "kind": 2,
         "importPath": "net-graph",
         "description": "net-graph",
-        "peekOfCode": "def pagerank(graph):\n    print(\"=========PAGERANK===========\")\n    # Apply PageRank to the graph\n    pr = nx.pagerank(graph)\n    # Print the PageRank scores\n    for node, score in pr.items():\n        print(f\"Node {node}: PageRank score = {score}\")\ndef find_cycles(graph):\n    print(\"========CYCLES=======\")\n    cycles = list(nx.simple_cycles(graph))",
+        "peekOfCode": "def pagerank(graph):\n    print(\"=========PAGERANK===========\")\n    # Apply PageRank to the graph\n    pr = nx.pagerank(graph)\n    # Print the PageRank scores\n    for node, score in pr.items():\n        print(f\"Node {node}: PageRank score = {score}\")\ndef find_cycles(graph):\n    print(\"========CYCLES=======\")\n    # Find cycles in the graph",
         "detail": "net-graph",
         "documentation": {}
     },
@@ -1063,7 +1080,7 @@
         "kind": 2,
         "importPath": "net-graph",
         "description": "net-graph",
-        "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    cycles = list(nx.simple_cycles(graph))\n    result = []\n    for cycle in cycles:\n        if len(cycle) > 3:\n            result.append(cycle)\n    print(result)\ndef centralities(G):\n    print(\"==========Centrality Measures==========\")",
+        "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    # Find cycles in the graph\n    cycles = list(nx.simple_cycles(G, length_bound=None))\n    # Filter out cycles of length 3 or less\n    result = []\n    for cycle in cycles:\n        if len(cycle) > 1:\n            # Get ref no of transactions in cycle\n            refs = [G.edges[u, v][\"ref_no_cheque_no\"] for u, v in zip(cycle, cycle[1:]+[cycle[0]])]",
         "detail": "net-graph",
         "documentation": {}
     },
