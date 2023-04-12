@@ -1,7 +1,7 @@
 .pageContainer{
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(to bottom, rgb(28, 28, 28), black);
+    /* background-image: linear-gradient(to bottom, rgb(28, 28, 28), black); */
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -13,9 +13,35 @@
 
 .workspaceContainer{
     flex: 1;
-    background-color: #353535;
+    /* background-color: #353535;s */
     border-radius: 8px 0 8px 8px;
     display: flex;
     flex-direction: row;
     overflow: hidden;
+}
+
+.toolbarContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.genReportTool{
+    background-color: #CE2424;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px 8px 0 0;
+    font-weight: 600;
+}
+
+.btn {
+	background-color: #ce2424;
+	color: white;
+	font-size: 1.3rem;
+	outline: none;
+	border: none;
+	padding: 0.5rem 1rem;
+	margin-top: 1rem;
 }

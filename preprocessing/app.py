@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
@@ -10,6 +10,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from neo4j import GraphDatabase
 import networkx as nx
+import base64
 
 from dotenv import load_dotenv
 load_dotenv()  # take environment variables from .env.
@@ -41,9 +42,9 @@ columnNames = {
 }
 
 bankColumnNames = {
-    "hdfc": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"],
-    "sbi": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"],
-    "icici": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance"]
+    "hdfc": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"],
+    "sbi": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"],
+    "icici": ["Txn Date", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Location"]
 }
 
 # TODO: convert all columns to a common column name of all CSV files
@@ -56,11 +57,13 @@ def preprocessFile(transactions, bankName, accountNo):
     transactions = transactions.assign(Bank=bankName)
     # transactions = transactions.assign(SenderNo=accountNo)
     transactions["Sender No"] = accountNo
+    transactions["Sender No"] = transactions["Sender No"].astype(str)
+    transactions["Recipient No"] = transactions["Recipient No"].astype(str)
     print(transactions)
     # Select columns that we need
-    transactions = transactions[["Txn Date", "Sender No", "Recipient No", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Bank"]]
+    transactions = transactions[["Txn Date", "Sender No", "Recipient No", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Bank", "Location"]]
 
-    print(transactions)
+    print("Here",transactions)
     # Add 0 to credit and debit null values
     transactions['Credit'] = transactions['Credit'].fillna(0)
     transactions['Debit'] = transactions['Debit'].fillna(0)
@@ -158,12 +161,13 @@ def accountTransactionsHelper(transactions, accountNo):
   df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
   m = df["Sender No"] == accountNo
   df.loc[m,"Amount"] *=-1
+  print(df.head())
   return df
 
 def balance_history(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
   print("---"*40)
-  print(df)
+#   print(df)
   print("---"*40)
   balanceHistory = sns.lineplot(
       x="Value Date",
@@ -175,6 +179,7 @@ def balance_history(transactions, accountNo):
   plt.ylabel("Balance")
   plt.savefig('line_plot')
   plt.close()
+  return os.getcwd()
 
 def spendAnalyser(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
@@ -191,31 +196,38 @@ def spendAnalyser(transactions, accountNo):
   plt.ylabel("Money")
   plt.savefig('bar_plot')
   plt.close()
+  return os.getcwd()
 
 @app.post("/get_balance_history/{accountNo}")
 async def get_balance_history(accountNo : str, file: UploadFile):
-    file_location = os.path.join(BASE_DIR, file.filename)
+    # file_location = os.path.join(BASE_DIR, file.filename)
 
-    # saving the file temporarily
-    with open(file_location, "wb+") as file_object:
-        file_object.write(file.file.read())
-    
-    csvFile = pd.read_csv(file_location)
-    
-    balance_history(csvFile, int(accountNo))
-    return FileResponse(os.path.join(BASE_DIR, "line_plot.png"), media_type='image/png')
+    # # saving the file temporarily
+    # with open(file_location, "wb+") as file_object:
+    #     file_object.write(file.file.read())
+    csvFile = convertToCSV(file)
+    outputpath = balance_history(csvFile, int(accountNo))
+    with open(os.path.join(outputpath, "line_plot.png"), 'rb') as f:
+        image_data = f.read()
+    encoded_image = base64.b64encode(image_data).decode()
+    return PlainTextResponse(encoded_image)
+    # return FileResponse(), media_type='image/png')
 
 @app.post("/get_spend_analyser/{accountNo}")
 async def get_spend_analyser(accountNo : str, file: UploadFile):
-    file_location = os.path.join(BASE_DIR, file.filename)
+    # file_location = os.path.join(BASE_DIR, file.filename)
 
-    # saving the file temporarily
-    with open(file_location, "wb+") as file_object:
-        file_object.write(file.file.read())
-    
-    csvFile = pd.read_csv(file_location)
-    spendAnalyser(csvFile, int(accountNo))
-    return FileResponse(os.path.join(BASE_DIR, "bar_plot.png"), media_type='image/png')
+    # # saving the file temporarily
+    # with open(file_location, "wb+") as file_object:
+    #     file_object.write(file.file.read())
+
+    csvFile = convertToCSV(file)
+    outputpath = spendAnalyser(csvFile, int(accountNo))
+    with open(os.path.join(outputpath, "bar_plot.png"), 'rb') as f:
+        image_data = f.read()
+    encoded_image = base64.b64encode(image_data).decode()
+    return PlainTextResponse(encoded_image)
+    # return FileResponse(os.path.join(outputpath, "bar_plot.png"), media_type='image/png')
 
 @app.post("/findVolumes")
 async def findVolumesAPI(file: UploadFile):
@@ -537,6 +549,100 @@ async def connected_components():
 
 
 
+@app.get("/bestPartition")
+async def partition():
+    print("PageRank")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, 
+        t.txnDate AS TxnDate, t.valueDate AS ValueDate, 
+        t.description AS Description, t.refNo AS RefNoChequeNo, 
+        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    """
+
+    # Create empty graph
+    G = nx.DiGraph()
+
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            txn_date = record["TxnDate"]
+            value_date = record["ValueDate"]
+            description = record["Description"]
+            ref_no_cheque_no = record["RefNoChequeNo"]
+            debit = record["Debit"]
+            credit = record["Credit"]
+            balance = record["Balance"]
+
+            # Add sender and receiver nodes to graph
+            G.add_node(sender_bank_id)
+            G.add_node(receiver_bank_id)
+
+            # Add transaction edge to graph
+            G.add_edge(sender_bank_id, receiver_bank_id, 
+                    txn_date=txn_date, value_date=value_date, 
+                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
+                    debit=debit, credit=credit, balance=balance)
+            
+    # pr = nx.pagerank(G)
+    from networkx.algorithms.community import greedy_modularity_communities
+
+    communities = list(greedy_modularity_communities(G))
+    for i, comm in enumerate(communities):
+        print(f"Community {i+1}: {comm}")
+
+    # Print the communities
+    # print(partition)
+
+    return {"Communities": communities}
+
+@app.get("/location")
+async def location():
+
+    print("Location")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID
+    """
+
+    result2  = []
+    sender_ids = []
+    final_result = []
+    threshold = 1
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            if sender_bank_id not in sender_ids:
+                sender_ids.append(sender_bank_id)
+            print("sender", sender_bank_id, "receiver", receiver_bank_id)
+
+        for id in sender_ids:
+            cypher_query2 ="MATCH (sender:Bank {id: $id})-[t:TRANSACTION]->(receiver:Bank)RETURN $id AS SenderBankID, t.location AS SenderLocation"
+            ans = list(session.run(cypher_query2, id=id))
+            print("result2", result2)
+            result2.append(ans)
+        
+        for i in range(0, len(result2)):
+            print("In")
+            if(len(result2[i]) > threshold):
+                obj = {"locations" : []}
+                obj["node"] = result2[i][0][0]
+                for loc in range(0, len(result2[i])):
+                    obj["locations"].append(result2[i][loc][1])
+                temp = obj
+                final_result.append(temp)
+
+    return {"locations_and_accounts": final_result}
 
 @app.get("/")
 async def root():
