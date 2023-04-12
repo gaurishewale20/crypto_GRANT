@@ -4,7 +4,6 @@ const fs = require("fs");
 const csv = require("csv-parser");
 const cors = require("cors");
 
-
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -12,7 +11,6 @@ app.use(cors());
 const registerRoute = require("./routes/uploadCSV.route");
 
 app.use("/", registerRoute);
-
 
 // (async () => {
 //   const neo4j = require("neo4j-driver");

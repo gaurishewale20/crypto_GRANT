@@ -10,7 +10,7 @@ node_modules
 # testing
 /coverage
 
-# production
+# productio
 /build
 
 # misc
@@ -25,3 +25,4 @@ yarn-debug.log*
 yarn-error.log*
 
 /.env
+preprocessing/.env

@@ -77,9 +77,11 @@ exports.uploadCSVController = async (req, res) => {
       try {
         for (const transaction of transactions) {
           // Create the sender and receiver bank nodes, if they don't exist already
-          const senderBankId = transaction.senderBankId;
-          const receiverBankId = transaction.receiverBankId;
+          const senderBankId = `${parseInt(transaction.senderBankId)}`;
+          const receiverBankId = `${parseInt(transaction.receiverBankId)}`;
           const refNo = transaction.refNo;
+          transaction.senderBankId = senderBankId;
+          transaction.receiverBankId = receiverBankId;
 
           let result2 = await session.run(
             "MATCH (sender:Bank )-[t:TRANSACTION {refNo: $refNo}]->(receiver:Bank) RETURN  t.refNo AS RefNoChequeNo",
@@ -109,6 +111,8 @@ exports.uploadCSVController = async (req, res) => {
             await session.run("MERGE (receiver:Bank {id: $receiverBankId})", {
               receiverBankId,
             });
+            console.log(senderBankId);
+            console.log(receiverBankId);
 
             // Create the TRANSACTION relationship between the banks
             await session.run(
@@ -175,7 +179,7 @@ exports.extractData = async (req, res) => {
         .run(query)
         .then((result) => {
           // console.log(result);
-          result.records.forEach((record) => {
+          result.records.forEach((record, index) => {
             console.log(
               record.get("SenderBankID"),
               record.get("ReceiverBankID"),
@@ -191,7 +195,9 @@ exports.extractData = async (req, res) => {
             links.push({
               source: record.get("SenderBankID"),
               target: record.get("ReceiverBankID"),
+              refNo: record.get("RefNoChequeNo"),
               value: 1,
+              curvature: index/result.records.length,
             });
           });
         })
