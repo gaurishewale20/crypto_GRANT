@@ -3,7 +3,7 @@ import styles from "./Report.module.css";
 import logo from "../../assets/logo.svg";
 import axios from "axios";
 import * as FileSaver from "file-saver";
-
+import { Buffer } from "buffer";
 const Report = () => {
 	const fetchVolumes = async (csvFile) => {
 		const formData = new FormData();
@@ -36,7 +36,7 @@ const Report = () => {
 				}
 			)
 			.then((res) => {
-				console.log(res.data);
+				// console.log(res.data);
 				const url = window.URL.createObjectURL(new Blob([res.data]));
 				setSpendsGraph(url);
 			})
@@ -54,15 +54,40 @@ const Report = () => {
 				formData
 			)
 			.then((res) => {
-				const url = window.URL.createObjectURL(new Blob([res.data]));
-				setBalanceGraph(url);
-				const file = new Blob([res.data], { type: "image/png" });
-				FileSaver.saveAs(file, "image.png");
-				console.log(url);
+				const base64Image = Buffer.from(res.data).toString("base64");
+				setBalanceGraph(`data:image/png;base64,${base64Image}`);
+				// console.log(`data:image/png;base64,${base64Image}`);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
+	};
+
+	const [cycleNodes, setCycleNodes] = useState([]);
+	const [hubs, setHubs] = useState([]);
+	const [authorities, setAuthorities] = useState([]);
+	const [pageRanks, setPageRanks] = useState([]);
+
+	const fetchCycles = async () => {
+		axios.get("http://127.0.0.1:8080/cycles").then((res) => {
+			console.log(res.data);
+			setCycleNodes(res.data.cycles);
+		});
+	};
+
+	const fetchHITS = async () => {
+		axios.get("http://127.0.0.1:8080/hits").then((res) => {
+			console.log(res.data);
+			setHubs(res.data.hubs);
+			setAuthorities(res.data.authorities);
+		});
+	};
+
+	const fetchPageRank = async () => {
+		axios.get("http://127.0.0.1:8080/").then((res) => {
+			console.log(res.data);
+			setPageRanks(res.data);
+		});
 	};
 
 	const [selectedFiles, setSelectedFiles] = useState([]);
@@ -76,6 +101,7 @@ const Report = () => {
 		fetchSpends(selectedFiles, accountNo);
 		fetchBalanceHistory(selectedFiles, accountNo);
 		fetchVolumes(selectedFiles);
+		fetchCycles();
 	};
 
 	const [incomingCount, setIncomingCount] = useState([]);
@@ -143,7 +169,8 @@ const Report = () => {
 					<div>
 						{/*Balance history*/}
 						<img
-							src="blob:http://localhost:3000/4fc8ba3d-ff0d-40db-ace4-0be5f52b4524"
+							src={balanceGraph}
+							// src="blob:http://localhost:3000/4fc8ba3d-ff0d-40db-ace4-0be5f52b4524"
 							alt="Balance"
 						/>
 					</div>
@@ -151,8 +178,82 @@ const Report = () => {
 				</div>
 				<div className={styles.ml}>
 					<div>{/* Fraud Patterns*/}</div>
-					<div>{/* HITS*/}</div>
-					<div>{/* PageRank */}</div>
+					<div>
+						{/* Cycle Patterns*/}
+						{cycleNodes.map((val, index) => {
+							return (
+								<div>
+									<h2>Cycle {index + 1}: </h2>
+									<div>
+										{val.nodes.map((node, i) => {
+											return (
+												<p>
+													{node} :{" "}
+													{val.transactions[i]}
+												</p>
+											);
+										})}
+									</div>
+								</div>
+							);
+						})}
+					</div>
+					<div>
+						{/* HITS*/}
+						<h2>
+							According to HITS we got the following nodes as Hubs
+							and authorities:
+						</h2>
+						<div>
+							<h5>Hubs</h5>
+							{Object.keys(hubs).map((key, i) => {
+								if (hubs[key] > 0.1) {
+									return (
+										<p>
+											{key} : {hubs[key]}
+										</p>
+									);
+								} else {
+									return null;
+								}
+							})}
+						</div>
+						<div>
+							<h5>Hubs</h5>
+							{Object.keys(authorities).map((key, i) => {
+								if (authorities[key] >= 0.1) {
+									return (
+										<p>
+											{key} : {authorities[key]}
+										</p>
+									);
+								} else {
+									return null;
+								}
+							})}
+						</div>
+					</div>
+					<div>
+						{/* PageRank */}
+						<h2>
+							According to Page rank we got the following nodes:
+						</h2>
+
+						<div>
+							<h5>Hubs</h5>
+							{pageRanks.nodes.map((val, i) => {
+								if (pageRanks.scores[i] >= 0.1) {
+									return (
+										<p>
+											{val} : {pageRanks.scores[i]}
+										</p>
+									);
+								} else {
+									return null;
+								}
+							})}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
