@@ -46,8 +46,8 @@ with driver.session() as session:
                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
                    debit=debit, credit=credit, balance=balance)
         
-    nx.draw(G)
-    plt.show()
+    # nx.draw(G)
+    # plt.show()
 
 def pagerank(graph):
     print("=========PAGERANK===========")
@@ -61,8 +61,18 @@ def pagerank(graph):
 
 def find_cycles(graph):
     print("========CYCLES=======")
-    accounts = list(nx.simple_cycles(graph))
+    # Find cycles in the graph
+    cycles = list(nx.simple_cycles(G, length_bound=None))
 
+    # Filter out cycles of length 3 or less
+    result = []
+    for cycle in cycles:
+        if len(cycle) > 1:
+            # Get ref no of transactions in cycle
+            refs = [G.edges[u, v]["ref_no_cheque_no"] for u, v in zip(cycle, cycle[1:]+[cycle[0]])]
+            result.append({"nodes": cycle, "transactions": refs})
+
+    print(result)
 
 
 
