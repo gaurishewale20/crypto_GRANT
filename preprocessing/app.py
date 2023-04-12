@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile, HTTPException
-# from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
@@ -141,7 +141,7 @@ def findVolumes(df):
     return incomingCount, outgoingCount, tranCount, mean
 
 def accountTransactionsHelper(transactions, accountNo):
-  df = transactions
+  df = transactions.copy()
   df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
   m = df["Sender No"] == accountNo
   df.loc[m,"Amount"] *=-1
@@ -149,13 +149,19 @@ def accountTransactionsHelper(transactions, accountNo):
 
 def balance_history(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
+  print("---"*40)
+  print(df)
+  print("---"*40)
   balanceHistory = sns.lineplot(
       x="Value Date",
       y="Balance",
       data=df
-  ).set_title('Balance History')
-  plt.show()
-  return balanceHistory
+  )
+  plt.title("Balance History")
+  plt.xlabel("Days")
+  plt.ylabel("Balance")
+  plt.savefig('line_plot')
+  plt.close()
 
 def spendAnalyser(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
@@ -167,8 +173,33 @@ def spendAnalyser(transactions, accountNo):
           bar.set_color('red')
       else:
           bar.set_color('green')
-  plt.show()
-  return history
+  plt.title("Spend History")
+  plt.xlabel("Days")
+  plt.ylabel("Money")
+  plt.savefig('bar_plot')
+  plt.close()
+
+# Sends a line plot graph of the accountNo's balance
+@app.get("/get_balance_history/{accountNo}")
+async def get_balance_history(accountNo : str):
+    filepath = os.path.join(BASE_DIR, "output_file1.csv")
+    csvFile = pd.read_csv(filepath)
+    balance_history(csvFile, int(accountNo))
+    return FileResponse(os.path.join(BASE_DIR, "line_plot.png"), media_type='image/png')
+
+# Sends a bar plot graph of the accountNo's balance
+@app.get("/get_spend_analyser/{accountNo}")
+async def get_spend_analyser(accountNo : str):
+    filepath = os.path.join(BASE_DIR, "output_file1.csv")
+    csvFile = pd.read_csv(filepath)
+    spendAnalyser(csvFile,int(accountNo))
+    return FileResponse(os.path.join(BASE_DIR, "bar_plot.png"), media_type='image/png')
+
+'''
+Note:
+output_file1.csv : contains newly added amount_transferred column which was not present in the existing file ("output_file.csv").
+This needs to be the generated common format file (...so might need to change in above functions)
+'''
 
 @app.post("/preprocess_csv_files")
 async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], accountNos: list[str]):
