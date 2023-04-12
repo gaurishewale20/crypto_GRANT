@@ -453,6 +453,8 @@ async def pageRank():
         # Run query and iterate over result
         result = session.run(cypher_query)
         for record in result:
+            if (record["Credit"] < 2000 and record["Credit"] != 0) or (record["Debit"] < 2000 and record["Debit"] != 0):
+                continue
             # Extract data from record
             sender_bank_id = record["SenderBankID"]
             receiver_bank_id = record["ReceiverBankID"]
