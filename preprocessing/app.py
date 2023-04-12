@@ -1,6 +1,6 @@
 import pandas as pd
 from fastapi import FastAPI, File, UploadFile, HTTPException
-# from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import os
@@ -8,6 +8,14 @@ from tabula.io import read_pdf
 from pathlib import Path
 import seaborn as sns
 from matplotlib import pyplot as plt
+from neo4j import GraphDatabase
+import networkx as nx
+
+uri = "bolt://localhost:7687"
+user = "neo4j"
+password = "Pablo123"
+driver = GraphDatabase.driver(uri, auth=(user, password))
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -141,7 +149,7 @@ def findVolumes(df):
     return incomingCount, outgoingCount, tranCount, mean
 
 def accountTransactionsHelper(transactions, accountNo):
-  df = transactions
+  df = transactions.copy()
   df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
   m = df["Sender No"] == accountNo
   df.loc[m,"Amount"] *=-1
@@ -149,13 +157,19 @@ def accountTransactionsHelper(transactions, accountNo):
 
 def balance_history(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
+  print("---"*40)
+  print(df)
+  print("---"*40)
   balanceHistory = sns.lineplot(
       x="Value Date",
       y="Balance",
       data=df
-  ).set_title('Balance History')
-  plt.show()
-  return balanceHistory
+  )
+  plt.title("Balance History")
+  plt.xlabel("Days")
+  plt.ylabel("Balance")
+  plt.savefig('line_plot')
+  plt.close()
 
 def spendAnalyser(transactions, accountNo):
   df = accountTransactionsHelper(transactions, accountNo)
@@ -167,8 +181,33 @@ def spendAnalyser(transactions, accountNo):
           bar.set_color('red')
       else:
           bar.set_color('green')
-  plt.show()
-  return history
+  plt.title("Spend History")
+  plt.xlabel("Days")
+  plt.ylabel("Money")
+  plt.savefig('bar_plot')
+  plt.close()
+
+# Sends a line plot graph of the accountNo's balance
+@app.get("/get_balance_history/{accountNo}")
+async def get_balance_history(accountNo : str):
+    filepath = os.path.join(BASE_DIR, "output_file1.csv")
+    csvFile = pd.read_csv(filepath)
+    balance_history(csvFile, int(accountNo))
+    return FileResponse(os.path.join(BASE_DIR, "line_plot.png"), media_type='image/png')
+
+# Sends a bar plot graph of the accountNo's balance
+@app.get("/get_spend_analyser/{accountNo}")
+async def get_spend_analyser(accountNo : str):
+    filepath = os.path.join(BASE_DIR, "output_file1.csv")
+    csvFile = pd.read_csv(filepath)
+    spendAnalyser(csvFile,int(accountNo))
+    return FileResponse(os.path.join(BASE_DIR, "bar_plot.png"), media_type='image/png')
+
+'''
+Note:
+output_file1.csv : contains newly added amount_transferred column which was not present in the existing file ("output_file.csv").
+This needs to be the generated common format file (...so might need to change in above functions)
+'''
 
 @app.post("/preprocess_csv_files")
 async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], accountNos: list[str]):
@@ -193,6 +232,62 @@ async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], ac
     # do some additional preprocessing on the final dataframe here
     result_csv = result_df.to_csv(index=False)
     return {"result_csv": result_csv}
+
+@app.get("/pageRank")
+async def pageRank():
+    print("PageRank")
+    cypher_query = """
+    MATCH (sender:Bank)-[t:TRANSACTION]->(receiver:Bank)
+    RETURN sender.id AS SenderBankID, receiver.id AS ReceiverBankID, 
+        t.txnDate AS TxnDate, t.valueDate AS ValueDate, 
+        t.description AS Description, t.refNo AS RefNoChequeNo, 
+        t.debit AS Debit, t.credit AS Credit, t.balance AS Balance
+    """
+
+    # Create empty graph
+    G = nx.DiGraph()
+
+    # Open Neo4j session
+    with driver.session() as session:
+        # Run query and iterate over result
+        result = session.run(cypher_query)
+        for record in result:
+            # Extract data from record
+            sender_bank_id = record["SenderBankID"]
+            receiver_bank_id = record["ReceiverBankID"]
+            txn_date = record["TxnDate"]
+            value_date = record["ValueDate"]
+            description = record["Description"]
+            ref_no_cheque_no = record["RefNoChequeNo"]
+            debit = record["Debit"]
+            credit = record["Credit"]
+            balance = record["Balance"]
+
+            # Add sender and receiver nodes to graph
+            G.add_node(sender_bank_id)
+            G.add_node(receiver_bank_id)
+
+            # Add transaction edge to graph
+            G.add_edge(sender_bank_id, receiver_bank_id, 
+                    txn_date=txn_date, value_date=value_date, 
+                    description=description, ref_no_cheque_no=ref_no_cheque_no, 
+                    debit=debit, credit=credit, balance=balance)
+            
+    pr = nx.pagerank(G)
+    nodes = []
+    scores = []
+
+    # Print the PageRank scores
+    for node, score in pr.items():
+        nodes.append(node)
+        scores.append(score)
+        print(f"Node {node}: PageRank score = {score}")
+
+    return {"nodes": nodes, "scores": scores}
+
+
+
+
 
 @app.get("/")
 async def root():
