@@ -6,6 +6,8 @@ import uvicorn
 import os
 from tabula.io import read_pdf
 from pathlib import Path
+import seaborn as sns
+from matplotlib import pyplot as plt
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -50,7 +52,7 @@ def preprocessFile(transactions, bankName, accountNo):
     transactions['Credit'] = transactions['Credit'].fillna(0)
     transactions['Debit'] = transactions['Debit'].fillna(0)
 
-    mask = transactions['Credit']==0
+    mask = transactions['Debit']==0
 
     transactions.loc[mask, ['Sender No', 'Recipient No']] = (
         transactions.loc[mask, ['Recipient No', 'Sender No']].values)
@@ -107,6 +109,66 @@ def convertToCSV(uploadedfile):
         print("File does not exist")
 
     return df
+
+def findVolumes(df):
+    incomingCount = {}
+    outgoingCount = {}
+    tranCount = {}
+    mean = {}
+
+    def addToDict(d, key, val):
+        if key in d:
+            d[key] += val
+        else :
+            d[key] = val
+
+    for index, row in df.iterrows():
+        addToDict(tranCount, row["Recipient No"], 1)
+        addToDict(tranCount, row["Sender No"], 1)
+        addToDict(outgoingCount, row['Recipient No'], row["Amount"])
+        addToDict(incomingCount, row['Sender No'], row["Amount"])
+
+    for key in tranCount:
+        inCount = 0
+        outCount = 0
+        if key in incomingCount:
+            inCount = incomingCount[key]
+        if key in outgoingCount:
+            outCount = outgoingCount[key]
+
+    mean[key] = (inCount - outCount)/tranCount[key]
+
+    return incomingCount, outgoingCount, tranCount, mean
+
+def accountTransactionsHelper(transactions, accountNo):
+  df = transactions
+  df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
+  m = df["Sender No"] == accountNo
+  df.loc[m,"Amount"] *=-1
+  return df
+
+def balance_history(transactions, accountNo):
+  df = accountTransactionsHelper(transactions, accountNo)
+  balanceHistory = sns.lineplot(
+      x="Value Date",
+      y="Balance",
+      data=df
+  ).set_title('Balance History')
+  plt.show()
+  return balanceHistory
+
+def spendAnalyser(transactions, accountNo):
+  df = accountTransactionsHelper(transactions, accountNo)
+  history = sns.barplot(data = df,
+              x = "Value Date",
+              y = "Amount",dodge=False)
+  for bar in history.patches:
+      if bar.get_height() < 0:
+          bar.set_color('red')
+      else:
+          bar.set_color('green')
+  plt.show()
+  return history
 
 @app.post("/preprocess_csv_files")
 async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], accountNos: list[str]):
