@@ -119,13 +119,13 @@ exports.uploadCSVController = async (req, res) => {
             console.log(
               `Created transaction with attributes: senderBankId=${senderBankId}, receiverBankId=${receiverBankId}, txnDate=${transaction.txnDate}, valueDate=${transaction.valueDate}, description=${transaction.description}, refNo=${transaction.refNo}, debit=${transaction.debit}, credit=${transaction.credit}, balance=${transaction.balance}, amount=${transaction.amount}`
             );
-            fs.unlink("./input.csv", (err) => {
-              if (err) {
-                throw err;
-              }
+            // fs.unlink("./input.csv", (err) => {
+            //   if (err) {
+            //     throw err;
+            //   }
 
-              console.log("Deleted File successfully.");
-            });
+            //   console.log("Deleted File successfully.");
+            // });
           }
         }
       } finally {
