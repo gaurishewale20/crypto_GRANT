@@ -1,0 +1,6 @@
+Sender Bank ID,Receiver Bank ID,Txn Date,Value Date,Description,Ref No./Cheque No.,Debit,Credit,Balance
+1002,2003,2022-04-07,2022-04-07,"ATM Withdrawal","1234567896",1000,0,14000
+2001,1003,2022-04-08,2022-04-08,"Salary Transfer","1234567897",0,15000,29000
+1003,2002,2022-04-09,2022-04-09,"Insurance Premium Payment","1234567898",3000,0,26000
+2002,1001,2022-04-10,2022-04-10,"Credit Card Payment","1234567899",0,1000,27000
+1001,2002,2022-04-10,2022-04-10,"Credit Card Payment","1234567899",0,1000,27000

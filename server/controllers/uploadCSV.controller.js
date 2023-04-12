@@ -1,6 +1,7 @@
 const fs = require("fs");
 const csv = require("csv-parser");
 require("dotenv").config();
+const neo4j = require("neo4j-driver");
 
 exports.uploadCSVController = async (req, res) => {
   console.log("req", req.files[0]);
@@ -166,5 +167,141 @@ exports.extractData = async (req, res) => {
       res.send({nodes, links});
     });
   });
+  
+};
+
+exports.pageRank = async (req, res) => {
+  console.log("===== EXTRACT DATA =======");
+  const neo4j = require("neo4j-driver");
+
+  const driver = neo4j.driver(
+    process.env.NEO4J_URI,
+    neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
+  );
+
+  const session = driver.session();
+  const results = [];
+
+    const query = `
+    CALL gds.pageRank.stream('transactions', {
+      dampingFactor: 0.85,
+      maxIterations: 20
+  })
+  YIELD nodeId, score
+  RETURN gds.util.asNode(nodeId).id AS node, score
+  ORDER BY score DESC
+  LIMIT 10
+  `;
+
+  session
+    .run(query)
+    .then((result) => {
+      // console.log(result);
+      result.records.forEach((record) => {
+        results.push(record.get('node'), record.get('score'));
+      });
+      console.log(results);
+      res.send(results);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      session.close();
+      driver.close();
+      // res.send({nodes, links});
+    });
+  
+};
+
+
+
+exports.getCycles = async(req, res) => {
+  console.log("===== Get Cycles =======");
+
+  const driver = neo4j.driver(
+    process.env.NEO4J_URI,
+    neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
+  );
+
+  const session = driver.session();
+  // Txn Date,Sender No,Recipient No,Value Date,Description,Ref No./Cheque No.,Debit,Credit,Balance,Bank
+  const query = `
+    MATCH R=(N)-[*]->(N) RETURN NODES(R)
+  `;
+
+  const results = [];
+
+  session
+    .run(query)
+    .then((result) => {
+      // console.log(result);
+      result.records.forEach((record) => {
+        const nodes = record.get('NODES(R)');
+        console.log(nodes.map(node => node.properties));
+        results.push(nodes.map(node => node.properties));
+      });
+      res.send(results);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      session.close();
+      driver.close();
+      // res.send(result.record);
+    });
+}
+
+
+// CALL gds.eigenvector.stream('transactions', {
+//   maxIterations: 20
+// })
+// YIELD nodeId, score
+// RETURN gds.util.asNode(nodeId).id AS node, score
+// ORDER BY score DESC
+// LIMIT 10
+
+
+exports.eigenVectorCentrality = async (req, res) => {
+  console.log("===== EXTRACT DATA =======");
+  const neo4j = require("neo4j-driver");
+
+  const driver = neo4j.driver(
+    process.env.NEO4J_URI,
+    neo4j.auth.basic(process.env.NEO4J_USERNAME, process.env.NEO4J_PASSWORD)
+  );
+
+  const session = driver.session();
+  const results = [];
+
+    const query = `
+    CALL gds.eigenvector.stream('transactions', {
+      maxIterations: 20
+    })
+    YIELD nodeId, score
+    RETURN gds.util.asNode(nodeId).id AS node, score
+    ORDER BY score DESC
+    LIMIT 10
+  `;
+
+  session
+    .run(query)
+    .then((result) => {
+      // console.log(result);
+      result.records.forEach((record) => {
+        results.push(record.get('node'), record.get('score'));
+      });
+      console.log(results);
+      res.send(results);
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      session.close();
+      driver.close();
+      // res.send({nodes, links});
+    });
   
 };

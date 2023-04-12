@@ -35,10 +35,12 @@ bankColumnNames = {
 def convertToCommonFormat(files):
     return files
     
-def preprocessFile(transactions, bankName):
+def preprocessFile(transactions, bankName, accountNo):
     print(transactions)
     # add bank name column
     transactions = transactions.assign(Bank=bankName)
+    # transactions = transactions.assign(SenderNo=accountNo)
+    transactions["Sender No"] = accountNo
     print(transactions)
     # Select columns that we need
     transactions = transactions[["Txn Date", "Sender No", "Recipient No", "Value Date", "Description", "Ref No./Cheque No.", "Debit", "Credit", "Balance", "Bank"]]
@@ -47,12 +49,19 @@ def preprocessFile(transactions, bankName):
     # Add 0 to credit and debit null values
     transactions['Credit'] = transactions['Credit'].fillna(0)
     transactions['Debit'] = transactions['Debit'].fillna(0)
-    
+
+    mask = transactions['Credit']==0
+
+    transactions.loc[mask, ['Sender No', 'Recipient No']] = (
+        transactions.loc[mask, ['Recipient No', 'Sender No']].values)
+
+    transactions["Amount"] = transactions[["Debit", "Credit"]].max(axis=1)
+
     print(transactions)
     # Drop all na values and duplicates too
     transactions.dropna(inplace=True)
     transactions.drop_duplicates(inplace=True)
-    
+
     return transactions
 
 
@@ -100,7 +109,7 @@ def convertToCSV(uploadedfile):
     return df
 
 @app.post("/preprocess_csv_files")
-async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str]):
+async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str], accountNos: list[str]):
     print(files, bankNames)
 
     dfs = []
@@ -113,7 +122,7 @@ async def preprocess_csv_files(files: list[UploadFile], bankNames: list[str]):
         # TODO: convert all columns to a common column name of all CSV files
         # df = convertToCommonFormat(csvFile, bankNames[i])
         # TODO: do some preprocessing on the dataframe here
-        df = preprocessFile(csvFile, bankNames[i])
+        df = preprocessFile(csvFile, bankNames[i], accountNos[i])
         print("DF : ",df)
         print("--------------------------------")
         dfs.append(df)

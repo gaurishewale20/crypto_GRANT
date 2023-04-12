@@ -10,7 +10,23 @@ const Home = () => {
 	const [selectedFiles, setSelectedFiles] = useState([]);
 	const [isSelected, setIsSelected] = useState(false);
 	const [bankNames, setBankNames] = useState([]);
+	const [accountNos, setAccountNos] = useState([]);
 	const [csvData, setCsvData] = useState(null);
+
+	const bankOptions = [
+		{
+			key: "HDFC",
+			value: "HDFC",
+		},
+		{
+			key: "ICICI",
+			value: "ICICI",
+		},
+		{
+			key: "SBI",
+			value: "SBI",
+		},
+	];
 
 	const changeHandler = (event) => {
 		console.log(event.target.files);
@@ -18,6 +34,7 @@ const Home = () => {
 			console.log("Hello1");
 			setSelectedFiles([...event.target.files]);
 			setBankNames(new Array(event.target.files.length).fill(""));
+			setAccountNos(new Array(event.target.files.length).fill(""));
 		} else {
 			console.log("Hello2");
 			setSelectedFiles((prevFiles) => {
@@ -34,6 +51,14 @@ const Home = () => {
 				];
 				return newNames;
 			});
+			setAccountNos((nos) => {
+				var newNos = [];
+				newNos = [
+					...nos,
+					...new Array(event.target.files.length).fill(""),
+				];
+				return newNos;
+			});
 		}
 		setIsSelected(true);
 	};
@@ -45,6 +70,7 @@ const Home = () => {
 		for (let i = 0; i < selectedFiles.length; i++) {
 			formData.append("files", selectedFiles[i]);
 			formData.append("bankNames", bankNames[i]);
+			formData.append("accountNos", accountNos[i]);
 		}
 
 		axios
@@ -92,8 +118,6 @@ const Home = () => {
 
 		console.log(selectedFiles[0], bankNames[0]);
 
-		// const res = await axios.post();
-
 		axios
 			.get("/")
 			.then((res) => {
@@ -124,17 +148,34 @@ const Home = () => {
 						selectedFiles.map((val, index) => (
 							<div key={index}>
 								<p>Filename: {val.name}</p>
-								<input
-									type="text"
-									name="bankName"
-									value={bankNames[index]}
-									// multiple="multiple"
+								<select
 									onChange={(e) => {
 										setBankNames((names) => {
 											var newNames = [];
 											newNames = [...names];
 											newNames[index] = e.target.value;
 											return newNames;
+										});
+									}}
+								>
+									<option value={""}>Select</option>
+									{bankOptions.map((val, index) => (
+										<option key={index} value={val.value}>
+											{val.key}
+										</option>
+									))}
+								</select>
+								<input
+									type="text"
+									name="accountNo"
+									value={accountNos[index]}
+									onChange={(e) => {
+										setAccountNos((accountNos) => {
+											var newAccountNos = [];
+											newAccountNos = [...accountNos];
+											newAccountNos[index] =
+												e.target.value;
+											return newAccountNos;
 										});
 									}}
 								/>
