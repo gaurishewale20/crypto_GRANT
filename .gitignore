@@ -10,7 +10,7 @@ node_modules
 # testing
 /coverage
 
-# production
+# productio
 /build
 
 # misc
