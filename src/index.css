@@ -1,0 +1,17 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Magda';
+}
+
+@font-face {
+  font-family: 'Magda';
+  src: local('Magda'), url(./fonts/Magda-Regular.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Magda';
+  font-weight: bold;
+  src: local('Magda'), url(./fonts/Magda-Bold.ttf) format('opentype');
+}

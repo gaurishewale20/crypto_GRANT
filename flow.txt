@@ -1,0 +1,1 @@
+input data(excel, csv, pdf) => convert to csv(common format) => pass to fast api for preprocessing => return a common csv from api => send this common file to backend and also provide a option to download this file => display this data in frontned using neo4j
