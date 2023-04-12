@@ -130,6 +130,14 @@
         "documentation": {}
     },
     {
+        "label": "PlainTextResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
         "label": "CORSMiddleware",
         "importPath": "fastapi.middleware.cors",
         "description": "fastapi.middleware.cors",
@@ -219,6 +227,15 @@
         "importPath": "networkx",
         "description": "networkx",
         "detail": "networkx",
+        "documentation": {}
+    },
+    {
+        "label": "base64",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "base64",
+        "description": "base64",
+        "detail": "base64",
         "documentation": {}
     },
     {
@@ -900,7 +917,7 @@
         "kind": 2,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "def convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    print(transactions)\n    # Select columns that we need",
+        "peekOfCode": "def convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    transactions[\"Sender No\"] = transactions[\"Sender No\"].astype(str)\n    transactions[\"Recipient No\"] = transactions[\"Recipient No\"].astype(str)",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -909,7 +926,7 @@
         "kind": 2,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "def preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    print(transactions)\n    # Select columns that we need\n    transactions = transactions[[\"Txn Date\", \"Sender No\", \"Recipient No\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Bank\"]]\n    print(transactions)",
+        "peekOfCode": "def preprocessFile(transactions, bankName, accountNo):\n    print(transactions)\n    # add bank name column\n    transactions = transactions.assign(Bank=bankName)\n    # transactions = transactions.assign(SenderNo=accountNo)\n    transactions[\"Sender No\"] = accountNo\n    transactions[\"Sender No\"] = transactions[\"Sender No\"].astype(str)\n    transactions[\"Recipient No\"] = transactions[\"Recipient No\"].astype(str)\n    print(transactions)\n    # Select columns that we need",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -936,7 +953,7 @@
         "kind": 2,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "def accountTransactionsHelper(transactions, accountNo):\n  df = transactions.copy()\n  df= df.loc[(df[\"Sender No\"]==accountNo) | (df[\"Recipient No\"]==accountNo)]\n  m = df[\"Sender No\"] == accountNo\n  df.loc[m,\"Amount\"] *=-1\n  return df\ndef balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)\n  print(df)",
+        "peekOfCode": "def accountTransactionsHelper(transactions, accountNo):\n  df = transactions.copy()\n  df= df.loc[(df[\"Sender No\"]==accountNo) | (df[\"Recipient No\"]==accountNo)]\n  m = df[\"Sender No\"] == accountNo\n  df.loc[m,\"Amount\"] *=-1\n  print(df.head())\n  return df\ndef balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -945,7 +962,7 @@
         "kind": 2,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "def balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)\n  print(df)\n  print(\"---\"*40)\n  balanceHistory = sns.lineplot(\n      x=\"Value Date\",\n      y=\"Balance\",\n      data=df\n  )",
+        "peekOfCode": "def balance_history(transactions, accountNo):\n  df = accountTransactionsHelper(transactions, accountNo)\n  print(\"---\"*40)\n#   print(df)\n  print(\"---\"*40)\n  balanceHistory = sns.lineplot(\n      x=\"Value Date\",\n      y=\"Balance\",\n      data=df\n  )",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -1017,7 +1034,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "UPLOAD_EXTENSIONS = ['.pdf', '.xlsx','.csv']\ncolumnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files",
+        "peekOfCode": "UPLOAD_EXTENSIONS = ['.pdf', '.xlsx','.csv']\ncolumnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"]\n}\n# TODO: convert all columns to a common column name of all CSV files",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -1026,7 +1043,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "columnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):",
+        "peekOfCode": "columnNames = {\n    \"Txn Date\": [\"Txn Date\",\"Transaction Date\"]\n}\nbankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -1035,7 +1052,7 @@
         "kind": 5,
         "importPath": "preprocessing.app",
         "description": "preprocessing.app",
-        "peekOfCode": "bankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)",
+        "peekOfCode": "bankColumnNames = {\n    \"hdfc\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"sbi\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"],\n    \"icici\": [\"Txn Date\", \"Value Date\", \"Description\", \"Ref No./Cheque No.\", \"Debit\", \"Credit\", \"Balance\", \"Location\"]\n}\n# TODO: convert all columns to a common column name of all CSV files\ndef convertToCommonFormat(files):\n    return files\ndef preprocessFile(transactions, bankName, accountNo):\n    print(transactions)",
         "detail": "preprocessing.app",
         "documentation": {}
     },
@@ -1081,6 +1098,15 @@
         "importPath": "net-graph",
         "description": "net-graph",
         "peekOfCode": "def find_cycles(graph):\n    print(\"========CYCLES=======\")\n    # Find cycles in the graph\n    cycles = list(nx.simple_cycles(G, length_bound=None))\n    # Filter out cycles of length 3 or less\n    result = []\n    for cycle in cycles:\n        if len(cycle) > 1:\n            # Get ref no of transactions in cycle\n            refs = [G.edges[u, v][\"ref_no_cheque_no\"] for u, v in zip(cycle, cycle[1:]+[cycle[0]])]",
+        "detail": "net-graph",
+        "documentation": {}
+    },
+    {
+        "label": "strongly_connected",
+        "kind": 2,
+        "importPath": "net-graph",
+        "description": "net-graph",
+        "peekOfCode": "def strongly_connected(graph):\n    print(\"============strongly connected=============\")\n    components = list(nx.strongly_connected_components(graph))\n    print(components)\ndef centralities(G):\n    print(\"==========Centrality Measures==========\")\n    # degree centrality\n    deg_cen = nx.degree_centrality(G)\n    print(\"Degree centrality:\", deg_cen)\n    # closeness centrality",
         "detail": "net-graph",
         "documentation": {}
     },
