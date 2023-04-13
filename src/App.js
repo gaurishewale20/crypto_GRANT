@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Visualize from "./components/Visualize/Visualize";
 import Report from "./components/Report/Report";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 
 function App() {
 	const router = createBrowserRouter([
@@ -30,6 +32,21 @@ function App() {
 				</>
 			),
 		},
+		{
+			path:"/login",
+			element:(
+				<>
+					<Login/>
+				</>
+			),
+		},{
+			path:"/signup",
+			element:(
+				<>
+					<Signup/>
+				</>
+			)
+		}
 	]);
 
 	return (
