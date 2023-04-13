@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Visualize from "./components/Visualize/Visualize";
 import Report from "./components/Report/Report";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
 	const router = createBrowserRouter([
@@ -15,7 +16,7 @@ function App() {
 			),
 		},
 		{
-			path: "/visualize",
+			path: "/visualize/:id",
 			element: (
 				<>
 					<Visualize />
@@ -23,10 +24,18 @@ function App() {
 			),
 		},
 		{
-			path: "/report",
+			path: "/report/:id",
 			element: (
 				<>
 					<Report />
+				</>
+			),
+		},
+		{
+			path: "/dashboard",
+			element: (
+				<>
+					<Dashboard />
 				</>
 			),
 		},

@@ -2,7 +2,7 @@ const express = require("express");
 const {
 	fetchInvestigationController,
 	fetchAllInvestigationsController,
-} = require("../controllers/auth.controller");
+} = require("../controllers/investigation.controller");
 const verify = require("../helpers/verify");
 const router = express.Router();
 
