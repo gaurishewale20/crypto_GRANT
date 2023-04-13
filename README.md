@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+# Fraud Detection Tool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This tool is designed to assist fraud investigators in detecting and analyzing suspicious banking transactions. The tool provides a user-friendly interface for uploading and visualizing bank statements, as well as implementing various pattern detection methods to identify potentially fraudulent transactions.
 
-## Available Scripts
+## Usage
 
-In the project directory, you can run:
+To use the tool, follow these steps:
 
-### `npm start`
+1. Visit our website and register with your basic details to create an account.
+2. Once logged in, navigate to the homepage.
+3. Upload the bank statement of the person you wish to investigate, in any available format (.pdf, .csv, .xlsx).
+4. Input the account number of the account holder (sender) and their bank name.
+5. Click on submit and the tool will automatically download the bank statement in a common format (.csv).
+6. Navigate to the "Visualize" page, where you can view all the nodes and their corresponding transactions.
+7. Observe the nodes, their patterns, and suspicious nodes (if flagged).
+8. See pattern detection methods, such as Page Rank algorithm, Community Clustering, HITS, and Cycles detection.
+9. Pattern detection mechanism is integrated with graph-visualization.
+10. Click on "Generate Report" button to create a detailed report of the analysis.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Pattern Detection Methods
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The following pattern detection methods have been integrated with the graph-visualization:
 
-### `npm test`
+- Page Rank algorithm
+- Community Clustering
+- HITS
+- Cycles detection
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## License
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This tool is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
