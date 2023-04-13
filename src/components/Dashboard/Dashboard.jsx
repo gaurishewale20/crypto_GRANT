@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import styles from "./Dashboard.module.css";
+import logo from "../../assets/logo.svg";
 
 const Dashboard = () => {
 	const navigate = useNavigate();
@@ -29,6 +30,16 @@ const Dashboard = () => {
 			});
 	};
 
+	const signout = (e) => {
+		e.preventDefault();
+		window.localStorage.clear();
+		//  function for sign out
+	};
+
+	const goToUploadPage = () => {
+		navigate("/");
+	};
+
 	useEffect(() => {
 		const onLoad = () => {
 			if (!window.localStorage.getItem("token")) {
@@ -42,25 +53,43 @@ const Dashboard = () => {
 
 		onLoad();
 	}, []);
+
 	return (
-		<div className={styles.main}>
-			Dashboard
-			<div className={styles.pageContainer}>
-				{investigations.map((val, index) => {
-					return (
-						<div>
-							<p style={{ color: "#000" }}>{val.name}</p>
-							<button
-								onClick={(e) => {
-									e.preventDefault();
-									navigate(`/visualize/${val._id}`);
-								}}
-							>
-								Open Investigation
-							</button>
-						</div>
-					);
-				})}
+		<div className={styles.pageContainer}>
+			<div className={styles.logoContainer}>
+				<img src={logo} alt="" />
+			</div>
+			<div className={styles.toolbarContainer}>
+				<button
+					className={styles.genReportTool}
+					onClick={goToUploadPage}
+				>
+					New Case
+				</button>
+				<button className={styles.genReportTool} onClick={signout}>
+					Sign Out
+				</button>
+			</div>
+			<div className={styles.workspaceContainer}>
+				<span className={styles.sectionHeader}>Dashboard</span>
+				<div className={styles.investigation}>
+					{investigations &&
+						investigations.map((val, index) => {
+							return (
+								<div className={styles.card}>
+									<button
+										className={styles.btn}
+										onClick={(e) => {
+											e.preventDefault();
+											navigate(`/visualize/${val._id}`);
+										}}
+									>
+										{val.name}
+									</button>
+								</div>
+							);
+						})}
+				</div>
 			</div>
 		</div>
 	);
