@@ -2,6 +2,9 @@
 
 This tool is designed to assist fraud investigators in detecting and analyzing suspicious banking transactions. The tool provides a user-friendly interface for uploading and visualizing bank statements, as well as implementing various pattern detection methods to identify potentially fraudulent transactions.
 
+![image](https://user-images.githubusercontent.com/59064326/231652965-cd76678b-d5a6-4205-ba79-1f004e01fba4.png)
+
+
 ## Usage
 
 To use the tool, follow these steps:
