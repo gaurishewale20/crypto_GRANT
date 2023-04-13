@@ -30,6 +30,10 @@ The following pattern detection methods have been integrated with the graph-visu
 - Cycles detection
 - Geographic detection method
 
+## Flow
+
+![](https://github.com/gaurishewale20/crypto_GRANT/blob/main/flowchart.png?raw=true)
+
 ## License
 
 This tool is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
