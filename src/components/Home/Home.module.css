@@ -41,6 +41,13 @@ p {
 	align-items: center;
 }
 
+.caseNameInput{
+	background-color: rgb(49, 49, 49);
+	color: white;
+	border: none;
+	outline: none;	
+}
+
 .uploadArea{
 	margin: 1rem 0;
 }

@@ -41,6 +41,7 @@ const Home = () => {
 	const [bankNames, setBankNames] = useState([]);
 	const [accountNos, setAccountNos] = useState([]);
 	const [csvData, setCsvData] = useState(null);
+    const [caseName, setCaseName] = useState("");
 
 	const onDrop = useCallback(
 		(acceptedFiles) => {
@@ -152,7 +153,7 @@ const Home = () => {
 
 				var newFormData = new FormData();
 				newFormData.append("files", blob);
-				newFormData.append("name", "Investigation 1");
+				newFormData.append("name", caseName);
 
 				axios
 					.post("http://localhost:5000/", newFormData, {
@@ -163,7 +164,7 @@ const Home = () => {
 					})
 					.then((res) => {
 						console.log(res);
-						navigate("/visualize");
+						navigate("/dashboard");
 					})
 					.catch((err) => {
 						console.log(err);
@@ -207,6 +208,15 @@ const Home = () => {
 				<div className={styles.description}>
 					Detecting Bank Frauds using Graphs
 				</div>
+                <input
+                    className={styles.caseNameInput}
+						type="text"
+						placeholder="Case Name"
+						value={caseName}
+						onChange={(e) => {
+                            setCaseName(e.target.value);
+                        }}
+					/>
 				<div className={styles.uploadArea} {...getRootProps({ style })}>
 					<input {...getInputProps()} />
 					{/* <UploadFile /> */}

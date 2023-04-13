@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router";
@@ -34,6 +34,16 @@ const Login = () => {
 			}); // Send login data to backend API endpoint
 		// console.log(res.data);
 	};
+
+	useEffect(() => {
+		const onLoad = () => {
+			if (window.localStorage.getItem("token")) {
+				navigate("/dashboard");
+			}
+		};
+
+		onLoad();
+	}, []);
 
 	return (
 		<div className={styles.main}>

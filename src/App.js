@@ -11,7 +11,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 function App() {
 	const router = createBrowserRouter([
 		{
-			path: "/landing",
+			path: "/",
 			element: (
 				<>
 					<LandingPage />
@@ -19,7 +19,7 @@ function App() {
 			),
 		},
 		{
-			path: "/",
+			path: "/upload",
 			element: (
 				<>
 					<Home />
