@@ -90,6 +90,7 @@ def convertToCSV(uploadedfile):
     print("------------------------------------------")
     print(file_ext)
     print("------------------------------------------")
+    print(uploadedfile.filename)
     if file_ext not in UPLOAD_EXTENSIONS:
         return "Invalid file type"
 
@@ -157,6 +158,8 @@ def findVolumes(df):
     return incomingCount, outgoingCount, tranCount, mean
 
 def accountTransactionsHelper(transactions, accountNo):
+  print("hellooo")
+  print(transactions)
   df = transactions.copy()
   df= df.loc[(df["Sender No"]==accountNo) | (df["Recipient No"]==accountNo)]
   m = df["Sender No"] == accountNo
@@ -205,7 +208,9 @@ async def get_balance_history(accountNo : str, file: UploadFile):
     # # saving the file temporarily
     # with open(file_location, "wb+") as file_object:
     #     file_object.write(file.file.read())
+    print(file)
     csvFile = convertToCSV(file)
+    print(csvFile)
     outputpath = balance_history(csvFile, int(accountNo))
     with open(os.path.join(outputpath, "line_plot.png"), 'rb') as f:
         image_data = f.read()

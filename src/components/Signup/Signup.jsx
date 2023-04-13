@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Signup.module.css";
 import { useNavigate } from "react-router";
@@ -34,6 +34,16 @@ const Signup = () => {
 			console.error(err);
 		}
 	};
+
+	useEffect(() => {
+		const onLoad = () => {
+			if (window.localStorage.getItem("token")) {
+				navigate("/dashboard");
+			}
+		};
+
+		onLoad();
+	}, []);
 
 	return (
 		<div className={styles.main}>

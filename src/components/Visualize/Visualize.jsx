@@ -266,8 +266,9 @@ const Visualize = () => {
 			console.log(res.data);
 			const tempSuspiciousList = [];
 			const rankData = res.data;
+            console.log(1/rankData.nodes.length);
 			rankData.nodes.forEach((node, index) => {
-				if (rankData.scores[index] > 0.3) {
+				if (rankData.scores[index] > (1/rankData.nodes.length)) {
 					tempSuspiciousList.push(
 						data.nodes.find((n) => n.id == node)
 					);
@@ -335,7 +336,8 @@ const Visualize = () => {
 	};
 
 	const generateReport = () => {
-		navigate(`/report/${investigation._id}`);
+        const id = window.location.pathname.split("/")[2];
+		navigate(`/report/${id}`);
 	};
 
 	useEffect(() => {

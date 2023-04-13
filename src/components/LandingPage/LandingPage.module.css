@@ -41,15 +41,11 @@ p {
 	align-items: center;
 }
 
-.caseNameInput{
-	background-color: rgb(49, 49, 49);
-	color: white;
-	border: none;
-	outline: none;	
-}
-
-.uploadArea{
-	margin: 1rem 0;
+.actionContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
 }
 
 .uploadBtn {
@@ -62,4 +58,10 @@ p {
 	margin-top: 1rem;
 	display: flex;
 	align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.uploadBtn:hover{
+    transform: translateY(-4px);
 }

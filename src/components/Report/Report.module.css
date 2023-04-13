@@ -24,6 +24,7 @@
 }
 .workspaceContainer{
     background-color: rgb(247, 245, 245);
+    padding: 1rem;
 }
 .tables{
     margin: 20px 0;
@@ -58,14 +59,21 @@
 .selectedUserGraphs{
     flex: 1;
     width:100%;
+    display: flex;
     flex-direction: row;
     overflow: hidden;
-
+    justify-content: center;
+    align-items: center;
 }
 
 .graphs{
     display: flex;
     gap: 16px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
 }
 
 .img{

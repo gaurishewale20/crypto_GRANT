@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./Login.module.css";
 import { useNavigate } from "react-router";
@@ -35,6 +35,16 @@ const Login = () => {
 		// console.log(res.data);
 	};
 
+	useEffect(() => {
+		const onLoad = () => {
+			if (window.localStorage.getItem("token")) {
+				navigate("/dashboard");
+			}
+		};
+
+		onLoad();
+	}, []);
+
 	return (
 		<div className={styles.main}>
 			<div className={styles.login_form}>
@@ -58,7 +68,7 @@ const Login = () => {
 				</form>
 				<span>
 					Don't have an account?{" "}
-					<a href="/login">Click here to Sign up</a>
+					<a href="/signup">Click here to Sign up</a>
 				</span>
 			</div>
 		</div>

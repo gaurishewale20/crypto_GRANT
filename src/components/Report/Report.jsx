@@ -52,6 +52,7 @@ const ReportPage = () => {
 	const fetchBalanceHistory = async (csvFile, accountNo) => {
 		const formData = new FormData();
 		formData.append("file", csvFile);
+		console.log(csvFile);
 		axios
 			.post(
 				`http://127.0.0.1:8080/get_balance_history/${accountNo}`,
@@ -119,14 +120,14 @@ const ReportPage = () => {
 		axios
 			.get(`http://localhost:5000/investigations/${id}`, {
 				headers: {
-					Authorization: `Bearer ${token}`,
+					Authorization: `Bearer ${window.localStorage.getItem("token")}`,
 				},
 			})
 			.then((res) => {
 				console.log(res.data.investigation.file);
 
 				setInvestigation(res.data.investigation);
-				const file = base64toFile(res.data.investigation.file, "input");
+				const file = base64toFile(res.data.investigation.file, "input.csv");
 				setSelectedFiles(file);
 
 				fetchVolumes(file);
@@ -197,7 +198,7 @@ const ReportPage = () => {
 			</div>
 			<div className={styles.workspaceContainer}>
 				<div className={styles.allAccountsTxnCount}>
-					<input type="file" onChange={changeHandler} />
+					{/* <input type="file" onChange={changeHandler} /> */}
 					<input
 						type="text"
 						onChange={(e) => setAccountNo(e.target.value)}
