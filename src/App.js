@@ -47,7 +47,7 @@ function App() {
 					<Signup/>
 				</>
 			)
-		}
+		},{
 			path: "/dashboard",
 			element: (
 				<>
