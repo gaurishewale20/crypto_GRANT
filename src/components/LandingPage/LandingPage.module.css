@@ -1,0 +1,67 @@
+.main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	align-items: center;
+	background-image: url("../../assets/bg_picture.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align: center;
+}
+
+.logoContainer img {
+	height: 3rem;
+	margin-bottom: 0.5rem;
+}
+
+.description {
+	color: white;
+	font-size: 1.8rem;
+	margin-bottom: 1rem;
+}
+
+button,
+input,
+select {
+	padding: 12px;
+	margin-right: 10px;
+}
+
+p {
+	color: white;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.actionContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.uploadBtn {
+	background-color: #ce2424;
+	color: white;
+	font-size: 1.3rem;
+	outline: none;
+	border: none;
+	padding: 0.5rem 1rem;
+	margin-top: 1rem;
+	display: flex;
+	align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.uploadBtn:hover{
+    transform: translateY(-4px);
+}

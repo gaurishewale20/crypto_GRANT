@@ -6,9 +6,18 @@ import Report from "./components/Report/Report";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Dashboard from "./components/Dashboard/Dashboard";
+import LandingPage from "./components/LandingPage/LandingPage";
 
 function App() {
 	const router = createBrowserRouter([
+		{
+			path: "/landing",
+			element: (
+				<>
+					<LandingPage />
+				</>
+			),
+		},
 		{
 			path: "/",
 			element: (
