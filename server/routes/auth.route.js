@@ -31,10 +31,10 @@ router.post(
 
 router.post(
 	"/login",
-	[
-		check("email").isEmail().withMessage("Email is not valid"),
-		check("password", "Password is required").notEmpty(),
-	],
+	// [
+	// 	check("email").isEmail().withMessage("Email is not valid"),
+	// 	check("password", "Password is required").notEmpty(),
+	// ],
 	loginController
 );
 
