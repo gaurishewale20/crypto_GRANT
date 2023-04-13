@@ -5,6 +5,7 @@ import Visualize from "./components/Visualize/Visualize";
 import Report from "./components/Report/Report";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
 	const router = createBrowserRouter([
@@ -17,7 +18,7 @@ function App() {
 			),
 		},
 		{
-			path: "/visualize",
+			path: "/visualize/:id",
 			element: (
 				<>
 					<Visualize />
@@ -25,7 +26,7 @@ function App() {
 			),
 		},
 		{
-			path: "/report",
+			path: "/report/:id",
 			element: (
 				<>
 					<Report />
@@ -47,6 +48,13 @@ function App() {
 				</>
 			)
 		}
+			path: "/dashboard",
+			element: (
+				<>
+					<Dashboard />
+				</>
+			),
+		},
 	]);
 
 	return (

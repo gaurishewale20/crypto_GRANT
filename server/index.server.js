@@ -14,9 +14,11 @@ app.use(cors());
 
 const registerRoute = require("./routes/uploadCSV.route");
 const authRoute = require("./routes/auth.route");
+const investigationRoute = require("./routes/investigation.route");
 
 app.use("/", registerRoute);
 app.use("/auth", authRoute);
+app.use("/investigations", investigationRoute);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port: ${port}`));
