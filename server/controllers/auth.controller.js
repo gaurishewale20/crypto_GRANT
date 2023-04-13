@@ -58,6 +58,7 @@ exports.registerController = (req, res) => {
 
 exports.loginController = (req, res) => {
 	const { email, password } = req.body;
+	console.log(email, password);
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {

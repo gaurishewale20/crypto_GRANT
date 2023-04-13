@@ -32,7 +32,7 @@ exports.uploadCSVController = async (req, res) => {
 		console.log("inpppppp", inputFile);
 		let base64data = "";
 		await fs.writeFile("input.csv", inputFile, (err) => {
-			if (!err){
+			if (!err) {
 				console.log("Data written");
 				const csvFile = fs.readFileSync("input.csv");
 				base64data = Buffer.from(csvFile).toString("base64");

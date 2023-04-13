@@ -70,6 +70,7 @@ const Visualize = () => {
 	const [user, setUser] = useState({});
 	const [token, setToken] = useState("");
 	const [investigation, setInvestigation] = useState({});
+	const [file, setFile] = useState();
 
 	function base64toFile(base64Data, filename) {
 		const sliceSize = 1024;
@@ -101,16 +102,14 @@ const Visualize = () => {
 		axios
 			.get(`http://localhost:5000/investigations/${id}`, {
 				headers: {
-					Authorization:
-						"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM3MzY4MjQ4M2ZiNDcxZWJlMzQyMmQiLCJpYXQiOjE2ODEzNDAwNDIsImV4cCI6MTY4MTk0NDg0Mn0.cd81aLVoNLI4pvIZUHZwvgtNMTXd2h3wLkEzPR_EuTA",
+					Authorization: `Bearer ${token}`,
 				},
 			})
 			.then((res) => {
 				console.log(res.data.investigation.file);
 
 				setInvestigation(res.data.investigation);
-				const file = base64toFile(res.data.investigation.file, "input");
-				console.log(file, "input");
+				setFile(base64toFile(res.data.investigation.file, "input"));
 			})
 			.catch((err) => {
 				console.log(err);
