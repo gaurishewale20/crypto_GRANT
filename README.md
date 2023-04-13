@@ -25,7 +25,9 @@ The following pattern detection methods have been integrated with the graph-visu
 - Community Clustering
 - HITS
 - Cycles detection
+- Geographic detection method
 
 ## License
 
 This tool is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
