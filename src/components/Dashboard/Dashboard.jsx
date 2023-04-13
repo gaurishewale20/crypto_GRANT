@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
 	const navigate = useNavigate();
@@ -42,9 +43,9 @@ const Dashboard = () => {
 		onLoad();
 	}, []);
 	return (
-		<div>
+		<div className={styles.main}>
 			Dashboard
-			<div>
+			<div className={styles.pageContainer}>
 				{investigations.map((val, index) => {
 					return (
 						<div>
