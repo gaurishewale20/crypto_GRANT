@@ -6,6 +6,7 @@ import * as FileSaver from "file-saver";
 import { Buffer } from "buffer";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useNavigate } from "react-router";
 
 const ReportPage = () => {
 	const fetchVolumes = async (csvFile) => {
@@ -118,8 +119,7 @@ const ReportPage = () => {
 		axios
 			.get(`http://localhost:5000/investigations/${id}`, {
 				headers: {
-					Authorization:
-						"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDM3MzY4MjQ4M2ZiNDcxZWJlMzQyMmQiLCJpYXQiOjE2ODEzNDAwNDIsImV4cCI6MTY4MTk0NDg0Mn0.cd81aLVoNLI4pvIZUHZwvgtNMTXd2h3wLkEzPR_EuTA",
+					Authorization: `Bearer ${token}`,
 				},
 			})
 			.then((res) => {
@@ -139,10 +139,12 @@ const ReportPage = () => {
 			});
 	};
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const onLoad = () => {
 			if (!window.localStorage.getItem("token")) {
-				// navigate("/login");
+				navigate("/login");
 			} else {
 				setToken(window.localStorage.getItem("token"));
 				setUser(JSON.parse(window.localStorage.getItem("user")));
